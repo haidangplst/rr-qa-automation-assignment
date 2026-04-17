@@ -3,13 +3,14 @@ using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using PlaywrightTests.Fixtures;
 using PlaywrightTests.PageObjects.TMDB;
+using PlaywrightTests.BaseTests;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class TMDBFilteringTests : PageTest
+public class TMDBFilteringTests : PlaywrightPageTest
 {
     private TMDBHomePage? _homePage;
     private APITestHelper? _apiHelper;

@@ -1,12 +1,13 @@
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using PlaywrightTests.BaseTests;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class SimpleValidationTest : PageTest
+public class SimpleValidationTest : PlaywrightPageTest
 {
     [Test]
     [Category("Smoke")]

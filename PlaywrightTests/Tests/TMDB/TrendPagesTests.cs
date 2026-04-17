@@ -1,13 +1,14 @@
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using PlaywrightTests.PageObjects.TMDB;
+using PlaywrightTests.BaseTests;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class TrendPagesTests : PageTest
+public class TrendPagesTests : PlaywrightPageTest
 {
 
     [Test]

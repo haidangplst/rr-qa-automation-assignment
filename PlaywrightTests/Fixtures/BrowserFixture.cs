@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using NUnit.Framework;
+using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Fixtures;
 
@@ -74,6 +75,19 @@ public class BrowserFixture
     [OneTimeTearDown]
     public async Task OneTimeTearDown()
     {
+        try
+        {
+            // Generate report after all tests complete
+            Console.WriteLine("Generating test report...");
+            var reportGenerator = new EnhancedHTMLReportGenerator();
+            var reportPath = reportGenerator.GenerateReport();
+            Console.WriteLine($"Report generated: {reportPath}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error generating report: {ex.Message}");
+        }
+
         try
         {
             if (_page != null)
