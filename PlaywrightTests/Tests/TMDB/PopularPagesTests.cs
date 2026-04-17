@@ -6,13 +6,14 @@ using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
 
+[Category("Smoke")]
 [Parallelizable(ParallelScope.All)]
 [TestFixture]
 public class CategoryPagesTests : PlaywrightPageTest
 {
     [Test]
     [Category("CategoryPagesTests")]
-    [Category("Smoke")]
+    
     public async Task TC_001_FilterByPopularCategory()
     {
         var testName = "TC_001_FilterByPopularCategory";
