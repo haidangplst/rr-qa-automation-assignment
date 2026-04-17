@@ -11,7 +11,7 @@ namespace PlaywrightTests.Tests.TMDB;
 public class NewestPagesTests : PlaywrightPageTest
 {
     [Test]
-    [Category("CategoryPages")]
+    [Category("NewestPagesTests")]
     [Category("Smoke")]
     public async Task TC_003_FilterByNewestCategory()
     {

@@ -11,7 +11,7 @@ namespace PlaywrightTests.Tests.TMDB;
 public class TopRatedPagesTests : PlaywrightPageTest
 {
     [Test]
-    [Category("CategoryPages")]
+    [Category("TopRatedPagesTests")]
     [Category("Smoke")]
     public async Task TC_004_FilterByTopRatedCategory()
     {
