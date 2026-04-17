@@ -15,8 +15,8 @@ public class PopularPage : TMDBBasePage
     private const string CategoryLabelSelector = "[class*='title'], [class*='header']";
 
     // Filter Options
-    private const string MovieTypeSelector = "button:has-text('Movies')";
-    private const string TVShowTypeSelector = "button:has-text('TV Shows')";
+    private const string TypeDropdownSelector = "//span[contains(@class, 'indicatorSeparator')]//..//..//div[text()='Movie']";
+    private const string TVShowTypeSelector = "//span[contains(@class, 'indicatorSeparator')]//..//..//div[text()='TV Shows']";
 
     // Results
     private const string ResultCardSelector = "div.grid.grid-cols-3.gap-4 > div";
@@ -57,8 +57,33 @@ public class PopularPage : TMDBBasePage
     /// </summary>
     public async Task FilterToMoviesAsync()
     {
-        await ClickAsync(MovieTypeSelector);
+        // Check current selection
+        var currentSelection = await Page.EvaluateAsync<string>(@"
+            () => {
+                const singleValue = document.querySelector('.css-1uccc91-singleValue');
+                return singleValue ? singleValue.textContent.trim() : '';
+            }
+        ");
+
+        if (currentSelection == "Movie")
+        {
+            Logger.Info("Movie filter already selected");
+            return;
+        }
+
+        await ClickAsync(TypeDropdownSelector);
+        await Page.Locator("[class*='option']").Filter(new() { HasText = "Movie" }).ClickAsync();
+
         await WaitForLoadingToCompleteAsync();
+
+        var sellectedOption = await Page.EvaluateAsync<string>(@"
+            () => {
+                const singleValue = document.querySelector('.css-1uccc91-singleValue');
+                return singleValue ? singleValue.textContent.trim() : '';
+            }
+        ");
+        sellectedOption.Equals("Movie", StringComparison.OrdinalIgnoreCase);
+
         Logger.Info("Filtered to Movies on Popular page");
     }
 
@@ -67,9 +92,33 @@ public class PopularPage : TMDBBasePage
     /// </summary>
     public async Task FilterToTVShowsAsync()
     {
-        await ClickAsync(TVShowTypeSelector);
+        var currentSelection = await Page.EvaluateAsync<string>(@"
+            () => {
+                const singleValue = document.querySelector('.css-1uccc91-singleValue');
+                return singleValue ? singleValue.textContent.trim() : '';
+            }
+        ");
+
+        if (currentSelection == "TV Shows")
+        {
+            Logger.Info("Movie filter already selected");
+            return;
+        }
+
+        await ClickAsync(TypeDropdownSelector);
+        await Page.Locator("[class*='option']").Filter(new() { HasText = "TV Shows" }).ClickAsync();
+
         await WaitForLoadingToCompleteAsync();
-        Logger.Info("Filtered to TV Shows on Popular page");
+
+        var sellectedOption = await Page.EvaluateAsync<string>(@"
+            () => {
+                const singleValue = document.querySelector('.css-1uccc91-singleValue');
+                return singleValue ? singleValue.textContent.trim() : '';
+            }
+        ");
+        sellectedOption.Equals("TV Shows", StringComparison.OrdinalIgnoreCase);
+
+        Logger.Info("Filtered to Movies on Popular page");
     }
 
     /// <summary>

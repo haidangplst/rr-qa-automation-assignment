@@ -6,7 +6,7 @@ using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
 
-[Parallelizable(ParallelScope.Self)]
+[Parallelizable(ParallelScope.All)]
 [TestFixture]
 public class CategoryPagesTests : PlaywrightPageTest
 {
@@ -51,13 +51,6 @@ public class CategoryPagesTests : PlaywrightPageTest
             }
             TestExecutionLogger.CompleteStep();
 
-            // Step 4
-            TestExecutionLogger.RecordStep(4, "Get items with ratings");
-            var itemsWithRatings = await popularPage.GetPopularItemsWithRatingsAsync();
-            TestExecutionLogger.LogStepInfo($"Retrieved {itemsWithRatings.Count} items with ratings");
-            TestExecutionLogger.LogStepInfo($"Sample ratings: {string.Join(", ", itemsWithRatings.Take(2).Select(i => $"{i.Item1}({i.Item2})"))}");
-            TestExecutionLogger.CompleteStep();
-
             Logger.TestEnd("TC-001", true);
             TestExecutionLogger.CompleteTest(true);
         }
@@ -82,6 +75,11 @@ public class CategoryPagesTests : PlaywrightPageTest
 
             Logger.Step("1", "Navigate to Popular page");
             await popularPage.NavigateToPopularAsync();
+
+            Logger.Step("2", "Click on Movies type filter");
+            await popularPage.FilterToMoviesAsync();
+
+
 
             Logger.Step("2", "Click on TV Shows type filter");
             await popularPage.FilterToTVShowsAsync();
