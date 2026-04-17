@@ -1,0 +1,222 @@
+name: Test with Category Filter
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'PlaywrightTests/**'
+      - '.github/workflows/test-with-category.yml'
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      test_category:
+        description: 'Test Category to run (leave empty for all tests)'
+        required: false
+        type: choice
+        options:
+          - '' # All tests
+          - 'Smoke'
+          - 'CategoryPages'
+          - 'CategoryFilters'
+          - 'TypeFilters'
+          - 'TitleSearch'
+          - 'Pagination'
+          - 'CombinedFilters'
+          - 'NegativeTests'
+          - 'UIValidation'
+          - 'CategoryPagesTests'
+          - 'NewestPagesTests'
+          - 'TopRatedPagesTests'
+      browser_type:
+        description: 'Browser Type'
+        required: true
+        default: 'Chrome'
+        type: choice
+        options:
+          - 'Chrome'
+          - 'Firefox'
+          - 'WebKit'
+      headless_mode:
+        description: 'Headless Mode'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  schedule:
+    # Run Smoke tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Matrix for scheduled and push/pull_request events (runs Smoke tests on Chrome headless)
+        include:
+          - test_category: 'Smoke'
+            browser: 'Chrome'
+            headless: 'true'
+
+    # Override matrix when workflow_dispatch is used
+    # When manually triggered, use the selected inputs instead of matrix
+
+    env:
+      BROWSER_TYPE: ${{ matrix.browser || github.event.inputs.browser_type || 'Chrome' }}
+      HEADLESS: ${{ matrix.headless || github.event.inputs.headless_mode || 'true' }}
+      TEST_CATEGORY: ${{ matrix.test_category || github.event.inputs.test_category || '' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Display Test Configuration
+        run: |
+          echo "═══════════════════════════════════════════════════════════════"
+          echo "📊 Test Configuration"
+          echo "═══════════════════════════════════════════════════════════════"
+          echo "Browser: ${{ env.BROWSER_TYPE }}"
+          echo "Headless: ${{ env.HEADLESS }}"
+          if [ -n "${{ env.TEST_CATEGORY }}" ]; then
+            echo "Category: ${{ env.TEST_CATEGORY }}"
+          else
+            echo "Category: All Tests"
+          fi
+          echo "═══════════════════════════════════════════════════════════════"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests with category filter
+        if: env.TEST_CATEGORY != ''
+        run: |
+          dotnet test --no-build --configuration Release \
+            --logger "console;verbosity=normal" \
+            --logger "nunit;LogFilePath=${{ runner.temp }}/test-results.xml" \
+            --filter "Category=${{ env.TEST_CATEGORY }}" \
+            --verbosity normal
+
+      - name: Run all tests (no category filter)
+        if: env.TEST_CATEGORY == ''
+        run: |
+          dotnet test --no-build --configuration Release \
+            --logger "console;verbosity=normal" \
+            --logger "nunit;LogFilePath=${{ runner.temp }}/test-results.xml" \
+            --verbosity normal
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ env.BROWSER_TYPE }}-${{ env.HEADLESS }}
+          path: |
+            ${{ runner.temp }}/test-results.xml
+            PlaywrightTests/Reports/
+          retention-days: 30
+
+      - name: Upload Playwright Videos (if any)
+        if: always() && env.HEADLESS == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-videos-${{ env.BROWSER_TYPE }}-headed
+          path: PlaywrightTests/test-results/
+          retention-days: 7
+
+      - name: Publish Test Report
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: ${{ runner.temp }}/test-results.xml
+          check_name: Test Results - ${{ env.BROWSER_TYPE }} (${{ env.HEADLESS }})
+          comment_mode: always
+
+  # Additional job to run multi-browser tests on manual trigger
+  multi-browser-test:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.test_category != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ['Chrome', 'Firefox']
+        headless: ['true']
+
+    env:
+      BROWSER_TYPE: ${{ matrix.browser }}
+      HEADLESS: ${{ matrix.headless }}
+      TEST_CATEGORY: ${{ github.event.inputs.test_category }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Display Test Configuration
+        run: |
+          echo "Running ${{ env.TEST_CATEGORY }} tests on ${{ env.BROWSER_TYPE }} (Headless: ${{ env.HEADLESS }})"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests with category filter
+        run: |
+          dotnet test --no-build --configuration Release \
+            --logger "console;verbosity=normal" \
+            --logger "nunit;LogFilePath=${{ runner.temp }}/test-results.xml" \
+            --filter "Category=${{ env.TEST_CATEGORY }}" \
+            --verbosity normal
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ env.BROWSER_TYPE }}-${{ env.HEADLESS }}
+          path: |
+            ${{ runner.temp }}/test-results.xml
+            PlaywrightTests/Reports/
+          retention-days: 30
+
+  # Summary job
+  test-summary:
+    if: always()
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display Test Summary
+        run: |
+          echo "═══════════════════════════════════════════════════════════════"
+          echo "✅ Test Execution Completed"
+          echo "═══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "Artifacts Generated:"
+          find artifacts -type f -name "*.xml" -o -name "*.html" | sed 's/^/  /'
+          echo ""
+          echo "Reports are available in the Artifacts section"
+          echo "═══════════════════════════════════════════════════════════════"
