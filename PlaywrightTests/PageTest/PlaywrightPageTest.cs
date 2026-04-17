@@ -1,3 +1,4 @@
+using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using PlaywrightTests.Utilities;
@@ -11,6 +12,15 @@ public class PlaywrightPageTest : PageTest
 {
     private static bool _reportGenerated = false;
     private static readonly object _reportLock = new object();
+
+    public override BrowserNewContextOptions ContextOptions()
+    {
+        return new BrowserNewContextOptions
+        {
+            ViewportSize = new ViewportSize { Width = 1920, Height = 1080 },
+            IgnoreHTTPSErrors = true
+        };
+    }
 
     [OneTimeTearDown]
     public new void OneTimeTearDown()

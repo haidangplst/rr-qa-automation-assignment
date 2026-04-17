@@ -19,7 +19,7 @@ public class PopularPage : TMDBBasePage
     private const string TVShowTypeSelector = "button:has-text('TV Shows')";
 
     // Results
-    private const string ResultCardSelector = "[class*='card'], [class*='result-item']";
+    private const string ResultCardSelector = "div.grid.grid-cols-3.gap-4 > div";
     private const string ResultTitleSelector = "h3, h2, [class*='title']";
     private const string ResultRatingSelector = "[class*='rating'], [class*='vote']";
     private const string ResultImageSelector = "img";
@@ -78,7 +78,7 @@ public class PopularPage : TMDBBasePage
     public async Task<List<string?>> GetPopularItemsAsync()
     {
         var titles = new List<string?>();
-        var titleLocators = Page.Locator(ResultCardSelector).Locator(ResultTitleSelector);
+        var titleLocators = Page.Locator(ResultCardSelector);
         int count = await titleLocators.CountAsync();
 
         for (int i = 0; i < count; i++)

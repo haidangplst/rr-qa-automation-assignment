@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Tests (Headed)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": ["test", "--settings", "${workspaceFolder}/.runsettings", "--filter", "HomePagesTests"],
+      "cwd": "${workspaceFolder}/PlaywrightTests",
+      "env": {
+        "HEADED": "1"
+      }
+    },
+    {
+      "name": "Debug All Tests (Headed)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": ["test", "--settings", "${workspaceFolder}/.runsettings"],
+      "cwd": "${workspaceFolder}/PlaywrightTests",
+      "env": {
+        "HEADED": "1"
+      }
+    },
+    {
+      "name": "Debug Tests (Playwright Inspector)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": ["test", "--settings", "${workspaceFolder}/.runsettings", "--filter", "HomePagesTests"],
+      "cwd": "${workspaceFolder}/PlaywrightTests",
+      "env": {
+        "PWDEBUG": "1"
+      }
+    }
+  ]
+}
