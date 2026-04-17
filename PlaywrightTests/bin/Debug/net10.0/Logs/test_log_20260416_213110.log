@@ -1,0 +1,354 @@
+Test Execution Log - 2026-04-16 21:31:10
+--------------------------------------------------------------------------------
+
+
+21:31:10.792 | TEST START | TC-003: Filter by Newest Category
+
+21:31:10.792 | TEST START | TC-004: Filter by Top Rated Category
+21:31:10.793 | STEP | [STEP 1] Navigate to Newest page
+21:31:10.793 | STEP | [STEP 1] Navigate to Top Rated page
+21:31:10.825 | INFO | Test teardown - Total logs: 365 chars
+
+21:31:10.967 | TEST START | TC-002: Filter by Trending Category
+21:31:10.967 | STEP | [STEP 1] Navigate to Trending page
+
+21:31:10.991 | TEST START | TC-001: Filter by Popular Category
+21:31:10.992 | STEP | [STEP 1] Navigate to Popular page
+
+21:31:11.003 | TEST START | TC-001: Filter by Popular Category
+21:31:11.005 | STEP | [STEP 1] Navigate to Popular page
+
+21:31:11.174 | TEST START | Simple Test: Navigation
+21:31:11.175 | STEP | [STEP 1] Navigate to example.com
+21:31:11.514 | INFO | Starting network call capture
+21:31:13.488 | STEP | [STEP 2] Verify URL
+21:31:13.489 | INFO | Current URL: https://example.com/
+21:31:13.490 | INFO [ASSERTION] | Assertion: URL is correct
+21:31:13.492 | TEST PASSED | Simple Test
+
+21:31:13.623 | TEST START | Simple Test: Page Load Validation
+21:31:13.624 | STEP | [STEP 1] Navigate to Example domain
+21:31:13.753 | STEP | [STEP 2] Wait for page to load
+21:31:13.780 | STEP | [STEP 3] Verify page title
+21:31:13.799 | INFO | Page title: Example Domain
+21:31:13.799 | INFO [ASSERTION] | Assertion: Page has a title
+21:31:13.800 | INFO [ASSERTION] | Assertion: Title contains 'Example'
+21:31:13.801 | STEP | [STEP 4] Verify main heading is visible
+21:31:13.861 | INFO | Main heading: Example Domain
+21:31:13.862 | INFO [ASSERTION] | Assertion: Heading contains 'Example'
+21:31:13.862 | STEP | [STEP 5] Keep browser open for 3 seconds so you can see it
+21:31:14.128 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:31:14.299 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:31:14.317 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:31:14.318 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:31:14.818 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:31:14.890 | INFO | Navigated to Trending page
+21:31:14.894 | STEP | [STEP 2] Verify Trending page loaded
+21:31:14.920 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:31:14.921 | INFO | Navigated to Popular page
+21:31:14.925 | STEP | [STEP 2] Verify Popular page loaded
+21:31:14.939 | INFO | Navigated to Top Rated page
+21:31:14.941 | STEP | [STEP 2] Verify Top Rated page loaded
+21:31:14.990 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:31:14.996 | TEST START | TC-002: Filter by Trending Category
+21:31:15.004 | INFO [ASSERTION] | Assertion: Trending page loaded successfully
+21:31:15.013 | STEP | [STEP 3] Get trending items
+21:31:15.031 | INFO [ASSERTION] | Assertion: Top Rated page loaded successfully
+21:31:15.032 | STEP | [STEP 3] Get top rated items
+21:31:15.035 | INFO | Navigated to Newest page
+21:31:15.036 | STEP | [STEP 2] Verify Newest page loaded
+21:31:15.040 | INFO | Found 0 trending items
+21:31:15.040 | ERROR [ASSERTION] | Assertion: Trending items found
+21:31:15.042 | STEP | [STEP 4] Get items with ratings
+21:31:15.048 | INFO [ASSERTION] | Assertion: Popular page loaded successfully
+21:31:15.050 | STEP | [STEP 3] Get popular items
+21:31:15.053 | INFO | Found 0 top rated items
+21:31:15.055 | ERROR [ASSERTION] | Assertion: Top Rated items found
+21:31:15.059 | INFO | Retrieved 0 items with ratings
+21:31:15.065 | TEST PASSED | TC-002
+21:31:15.065 | INFO | Found 0 popular items
+21:31:15.066 | ERROR [ASSERTION] | Assertion: Popular items found
+21:31:15.067 | STEP | [STEP 4] Get items with ratings
+21:31:15.067 | ERROR | Test failed
+Exception: The process cannot access the file 'C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\bin\Debug\net10.0\Logs\test_log_20260416_213110.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)
+   at System.IO.File.AppendAllText(String path, String contents, Encoding encoding)
+   at PlaywrightTests.Utilities.Logger.Step(String stepNumber, String description) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\Logger.cs:line 78
+   at PlaywrightTests.Tests.TMDB.TopRatedPagesTests.TC_004_FilterByTopRatedCategory() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\TopRatedPagesTests.cs:line 35
+21:31:15.068 | ERROR | Test failed
+Exception: The process cannot access the file 'C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\bin\Debug\net10.0\Logs\test_log_20260416_213110.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)
+   at System.IO.File.AppendAllText(String path, String contents, Encoding encoding)
+   at PlaywrightTests.Utilities.Logger.Log(LogLevel level, String message, String context) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\Logger.cs:line 171
+   at PlaywrightTests.Utilities.Logger.Info(String message, String context) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\Logger.cs:line 43
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.NavigateToPopularAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 42
+   at PlaywrightTests.Tests.TMDB.HomePagesTests.TC_001_FilterByPopularCategory() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\HomePagesTests.cs:line 24
+21:31:15.070 | TEST FAILED | TC-001
+21:31:15.073 | INFO [ASSERTION] | Assertion: Newest page loaded successfully
+21:31:15.079 | STEP | [STEP 3] Get newest items
+21:31:15.080 | TEST FAILED | TC-004
+  The process cannot access the file 'C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\bin\Debug\net10.0\Logs\test_log_20260416_213110.log' because it is being used by another process.
+21:31:15.082 | INFO | Retrieved 0 items with ratings
+21:31:15.083 | TEST PASSED | TC-001
+21:31:15.100 | INFO | Found 0 newest items
+21:31:15.135 | ERROR [ASSERTION] | Assertion: Newest items found
+21:31:15.143 | STEP | [STEP 4] Get items with release dates
+21:31:15.153 | INFO | Retrieved 0 items with dates
+21:31:15.156 | TEST PASSED | TC-003
+21:31:15.186 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+
+21:31:15.289 | TEST START | TC-009: Filter by TV Shows Type
+21:31:15.291 | STEP | [STEP 1] Navigate to Popular page
+21:31:15.305 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:31:15.305 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:31:15.324 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:31:15.327 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:31:15.490 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:31:15.523 | STEP | [STEP 1] Click on Trending filter
+
+21:31:15.570 | TEST START | TC-002: Filter by Trending Category
+21:31:15.571 | STEP | [STEP 1] Navigate to Trending page
+21:31:15.702 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:15.718 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:15.719 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:16.087 | INFO | Navigated to Popular page
+21:31:16.088 | STEP | [STEP 2] Click on TV Shows type filter
+21:31:16.797 | INFO | Navigated to Trending page
+21:31:16.799 | STEP | [STEP 2] Verify Trending page loaded
+21:31:16.834 | INFO [ASSERTION] | Assertion: Trending page loaded successfully
+21:31:16.836 | STEP | [STEP 3] Get trending items
+21:31:16.845 | INFO | Found 0 trending items
+21:31:16.846 | ERROR [ASSERTION] | Assertion: Trending items found
+21:31:16.847 | STEP | [STEP 4] Get items with ratings
+21:31:16.857 | INFO | Retrieved 0 items with ratings
+21:31:16.860 | TEST PASSED | TC-002
+21:31:16.883 | TEST PASSED | Simple Test
+
+21:31:17.136 | TEST START | TC-003: Filter by Newest Category
+21:31:17.137 | STEP | [STEP 1] Navigate to Newest page
+21:31:18.490 | INFO | Navigated to Newest page
+21:31:18.493 | STEP | [STEP 2] Verify Newest page loaded
+21:31:18.515 | INFO [ASSERTION] | Assertion: Newest page loaded successfully
+21:31:18.516 | STEP | [STEP 3] Get newest items
+21:31:18.521 | INFO | Found 0 newest items
+21:31:18.522 | ERROR [ASSERTION] | Assertion: Newest items found
+21:31:18.523 | STEP | [STEP 4] Get items with release dates
+21:31:18.528 | INFO | Retrieved 0 items with dates
+21:31:18.528 | TEST PASSED | TC-003
+
+21:31:18.678 | TEST START | TC-004: Filter by Top Rated Category
+21:31:18.678 | STEP | [STEP 1] Navigate to Top Rated page
+21:31:19.539 | INFO | Navigated to Top Rated page
+21:31:19.540 | STEP | [STEP 2] Verify Top Rated page loaded
+21:31:19.583 | INFO [ASSERTION] | Assertion: Top Rated page loaded successfully
+21:31:19.584 | STEP | [STEP 3] Get top rated items
+21:31:19.592 | INFO | Found 0 top rated items
+21:31:19.595 | ERROR [ASSERTION] | Assertion: Top Rated items found
+21:31:19.598 | STEP | [STEP 4] Get items with ratings
+21:31:19.622 | INFO | Retrieved 0 items with ratings
+21:31:19.623 | STEP | [STEP 5] Verify items are sorted by rating (descending)
+21:31:19.640 | INFO | Top Rated items are correctly sorted in descending order
+21:31:19.641 | INFO [ASSERTION] | Assertion: Items sorted by rating in descending order
+21:31:19.641 | TEST PASSED | TC-004
+
+21:31:19.900 | TEST START | TC-008: Filter by Movies Type
+21:31:19.900 | STEP | [STEP 1] Test Movies filter in PopularPage
+21:31:21.013 | INFO | PopularPage loaded successfully
+21:31:21.020 | STEP | [STEP 2] Test Movies filter in TrendingPage
+21:31:21.568 | INFO | TrendingPage loaded successfully
+21:31:21.569 | STEP | [STEP 3] Test Movies filter in NewestPage
+21:31:24.152 | INFO | NewestPage loaded successfully
+21:31:24.153 | STEP | [STEP 4] Test Movies filter in TopRatedPage
+21:31:24.889 | INFO | TopRatedPage loaded successfully
+21:31:24.890 | TEST PASSED | TC-008
+
+21:31:25.013 | TEST START | TC-009: Filter by TV Shows Type
+21:31:25.014 | STEP | [STEP 1] Navigate to Popular page
+21:31:25.741 | INFO | Navigated to Popular page
+21:31:25.742 | STEP | [STEP 2] Click on TV Shows type filter
+21:31:45.547 | INFO | Test teardown - Total logs: 12095 chars
+21:31:45.690 | INFO | Starting network call capture
+21:31:45.852 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:31:45.956 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:31:45.971 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:31:46.003 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:31:46.108 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToTVShowsAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 70
+   at PlaywrightTests.Tests.TMDB.CategoryPagesTests.TC_009_FilterByTVShowsType() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\PopularPagesTests.cs:line 63
+21:31:46.109 | TEST FAILED | TC-009
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+
+21:31:46.277 | TEST START | TC-010: Toggle Between Movies and TV Shows
+21:31:46.277 | STEP | [STEP 1] Navigate to Popular page
+21:31:46.312 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:31:46.404 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:31:46.438 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:31:46.439 | TEST START | TC-003: Filter by Newest Category
+21:31:46.554 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:31:46.647 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:31:46.655 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:31:46.672 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:31:46.684 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:31:46.804 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:31:46.823 | STEP | [STEP 1] Click on Newest filter
+21:31:46.935 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:46.938 | INFO | Navigated to Popular page
+21:31:46.939 | STEP | [STEP 2] Filter by Movies
+21:31:46.953 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:46.975 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:31:55.748 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToTVShowsAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 70
+   at PlaywrightTests.Tests.TMDB.HomePagesTests.TC_009_FilterByTVShowsType() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\HomePagesTests.cs:line 278
+21:31:55.748 | TEST FAILED | TC-009
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+
+21:31:56.150 | TEST START | TC-010: Toggle Between Movies and TV Shows
+21:31:56.151 | STEP | [STEP 1] Navigate to Popular page
+21:31:56.930 | INFO | Navigated to Popular page
+21:31:56.932 | STEP | [STEP 2] Filter by Movies
+21:32:16.838 | INFO | Test teardown - Total logs: 17053 chars
+21:32:16.943 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToMoviesAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 60
+   at PlaywrightTests.Tests.TMDB.CategoryPagesTests.TC_010_ToggleBetweenMoviesAndTVShows() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\PopularPagesTests.cs:line 93
+21:32:16.943 | TEST FAILED | TC-010
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")
+21:32:17.173 | INFO | Starting network call capture
+21:32:17.311 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:32:17.419 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:32:17.446 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:32:17.459 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:32:17.711 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:32:17.828 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:32:17.861 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:32:17.863 | TEST START | TC-004: Filter by Top Rated Category
+21:32:17.976 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:32:18.072 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:32:18.081 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:32:18.119 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:32:18.130 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:32:18.242 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:32:18.264 | STEP | [STEP 1] Click on Top Rated filter
+21:32:18.352 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:32:18.414 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:32:18.415 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:32:26.935 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToMoviesAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 60
+   at PlaywrightTests.Tests.TMDB.HomePagesTests.TC_010_ToggleBetweenMoviesAndTVShows() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\HomePagesTests.cs:line 308
+21:32:26.936 | TEST FAILED | TC-010
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")
+
+21:32:27.227 | TEST START | All Categories Load Test
+21:32:27.228 | STEP | [STEP 1] Check Popular category
+21:32:27.269 | ERROR [ASSERTION] | Assertion: Popular page loaded
+21:32:27.270 | STEP | [STEP 2] Check Trending category
+21:32:27.281 | ERROR [ASSERTION] | Assertion: Trending page loaded
+21:32:27.281 | STEP | [STEP 3] Check Newest category
+21:32:27.292 | ERROR [ASSERTION] | Assertion: Newest page loaded
+21:32:27.292 | STEP | [STEP 4] Check Top Rated category
+21:32:27.304 | ERROR [ASSERTION] | Assertion: Top Rated page loaded
+21:32:27.304 | INFO | All 4 categories checked, 0 passed successfully
+21:32:27.305 | TEST FAILED | All Categories Load Test
+21:32:48.279 | INFO | Test teardown - Total logs: 22241 chars
+21:32:48.436 | INFO | Starting network call capture
+21:32:48.595 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:32:48.694 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:32:48.738 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:32:48.752 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:32:49.014 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:32:49.095 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:32:49.123 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:32:49.125 | TEST START | TC-005: Search by Title - Exact Match
+21:32:49.274 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:32:49.380 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:32:49.405 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:32:49.408 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:32:49.423 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:32:49.577 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:32:49.599 | STEP | [STEP 1] Search for 'Inception'
+21:32:49.667 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:32:49.699 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:32:49.716 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:19.607 | INFO | Test teardown - Total logs: 24221 chars
+21:33:19.931 | INFO | Starting network call capture
+21:33:20.070 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:33:20.166 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:33:20.178 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:33:20.212 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:33:20.495 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:33:20.581 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:33:20.617 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:33:20.621 | TEST START | TC-006: Search by Title - Partial Match
+21:33:20.771 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:33:20.882 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:33:20.882 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:33:20.883 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:33:20.917 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:33:21.042 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:33:21.063 | STEP | [STEP 1] Search for 'Avatar'
+21:33:21.177 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:21.202 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:21.225 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:51.073 | INFO | Test teardown - Total logs: 26200 chars
+21:33:51.379 | INFO | Starting network call capture
+21:33:51.543 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:33:51.649 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:33:51.653 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:33:51.679 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:33:51.964 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:33:52.051 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:33:52.079 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:33:52.081 | TEST START | TC-007: Search by Title - No Results
+21:33:52.213 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:33:52.320 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:33:52.321 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:33:52.323 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:33:52.347 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:33:52.508 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:33:52.528 | STEP | [STEP 1] Search for non-existent title 'XYZ123NoSuchMovie'
+21:33:52.613 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:52.614 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:33:52.649 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)

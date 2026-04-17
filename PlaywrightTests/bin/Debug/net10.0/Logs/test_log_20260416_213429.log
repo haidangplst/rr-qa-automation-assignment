@@ -1,0 +1,51 @@
+Test Execution Log - 2026-04-16 21:34:29
+--------------------------------------------------------------------------------
+
+
+21:34:29.561 | TEST START | TC-001: Filter by Popular Category
+21:34:29.563 | STEP | [STEP 1] Navigate to Popular page
+21:34:30.323 | INFO | Navigated to Popular page
+21:34:30.324 | STEP | [STEP 2] Verify Popular page loaded
+21:34:30.345 | INFO [ASSERTION] | Assertion: Popular page loaded successfully
+21:34:30.346 | STEP | [STEP 3] Get popular items
+21:34:30.352 | INFO | Found 0 popular items
+21:34:30.352 | ERROR [ASSERTION] | Assertion: Popular items found
+21:34:30.354 | STEP | [STEP 4] Get items with ratings
+21:34:30.360 | INFO | Retrieved 0 items with ratings
+21:34:30.361 | TEST PASSED | TC-001
+
+21:34:30.467 | TEST START | TC-009: Filter by TV Shows Type
+21:34:30.468 | STEP | [STEP 1] Navigate to Popular page
+21:34:31.091 | INFO | Navigated to Popular page
+21:34:31.091 | STEP | [STEP 2] Click on TV Shows type filter
+21:35:01.109 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToTVShowsAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 70
+   at PlaywrightTests.Tests.TMDB.CategoryPagesTests.TC_009_FilterByTVShowsType() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\PopularPagesTests.cs:line 63
+21:35:01.110 | TEST FAILED | TC-009
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('TV Shows')")
+
+21:35:01.329 | TEST START | TC-010: Toggle Between Movies and TV Shows
+21:35:01.329 | STEP | [STEP 1] Navigate to Popular page
+21:35:02.018 | INFO | Navigated to Popular page
+21:35:02.019 | STEP | [STEP 2] Filter by Movies
+21:35:32.033 | ERROR | Test failed
+Exception: Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")
+   at Microsoft.Playwright.Transport.Connection.InnerSendMessageToServerAsync[T](ChannelOwner object, String method, Dictionary`2 dictionary, Boolean keepNulls) in /_/src/Playwright/Transport/Connection.cs:line 201
+   at Microsoft.Playwright.Transport.Connection.WrapApiCallAsync[T](Func`1 action, Boolean isInternal, String title) in /_/src/Playwright/Transport/Connection.cs:line 505
+   at PlaywrightTests.PageObjects.BasePage.ClickAsync(String selector) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\BasePage.cs:line 27
+   at PlaywrightTests.PageObjects.TMDB.PopularPage.FilterToMoviesAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\PageObjects\TMDB\PopularPage.cs:line 60
+   at PlaywrightTests.Tests.TMDB.CategoryPagesTests.TC_010_ToggleBetweenMoviesAndTVShows() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\PopularPagesTests.cs:line 93
+21:35:32.036 | TEST FAILED | TC-010
+  Timeout 30000ms exceeded.
+Call log:
+  - waiting for Locator("button:has-text('Movies')")

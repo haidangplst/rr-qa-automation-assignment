@@ -1,0 +1,22 @@
+Test Execution Log - 2026-04-16 21:08:16
+--------------------------------------------------------------------------------
+
+
+21:08:16.826 | TEST START | Simple Test: Navigation
+21:08:16.827 | STEP | [STEP 1] Navigate to example.com
+21:08:17.079 | STEP | [STEP 2] Verify URL
+21:08:17.081 | INFO | Current URL: https://example.com/
+21:08:17.082 | INFO [ASSERTION] | Assertion: URL is correct
+21:08:17.084 | TEST PASSED | Simple Test
+
+21:08:17.276 | TEST START | Simple Test: Page Load Validation
+21:08:17.277 | STEP | [STEP 1] Navigate to Example domain
+21:08:17.482 | STEP | [STEP 2] Wait for page to load
+21:08:17.509 | STEP | [STEP 3] Verify page title
+21:08:17.534 | INFO | Page title: Example Domain
+21:08:17.535 | INFO [ASSERTION] | Assertion: Page has a title
+21:08:17.535 | INFO [ASSERTION] | Assertion: Title contains 'Example'
+21:08:17.536 | STEP | [STEP 4] Verify main heading is visible
+21:08:17.608 | INFO | Main heading: Example Domain
+21:08:17.609 | INFO [ASSERTION] | Assertion: Heading contains 'Example'
+21:08:17.610 | TEST PASSED | Simple Test

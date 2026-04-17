@@ -1,0 +1,25 @@
+Test Execution Log - 2026-04-16 21:14:55
+--------------------------------------------------------------------------------
+
+21:14:55.845 | INFO | Starting network call capture
+21:14:56.744 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:14:56.832 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 200 (0ms)
+21:14:56.834 | INFO [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 200 (0ms)
+21:14:56.884 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 200 (0ms)
+21:14:57.225 | INFO [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 200 (0ms)
+21:14:57.316 | INFO [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 200 (0ms)
+21:14:57.381 | INFO | Test setup complete - Page URL: https://tmdb-discover.surge.sh/popular
+
+21:14:57.384 | TEST START | TC-001: Filter by Popular Category
+21:14:57.385 | STEP | [STEP 1] Navigate to home page
+21:14:57.518 | INFO [API] | GET https://tmdb-discover.surge.sh/ -> 200 (0ms)
+21:14:57.641 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/2.9288b687.chunk.css -> 304 (0ms)
+21:14:57.643 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/css/main.1ec51116.chunk.css -> 304 (0ms)
+21:14:57.657 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/main.35f21c82.chunk.js -> 304 (0ms)
+21:14:57.658 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/js/2.a392af60.chunk.js -> 304 (0ms)
+21:14:57.787 | WARNING [API] | GET https://tmdb-discover.surge.sh/static/media/search.f5d4cc57.svg -> 304 (0ms)
+21:14:57.810 | STEP | [STEP 2] Click on Popular filter button
+21:14:57.909 | INFO [API] | GET https://api.themoviedb.org/3/genre/movie/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:14:57.928 | INFO [API] | GET https://api.themoviedb.org/3/genre/tv/list?api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:14:57.951 | INFO [API] | GET https://api.themoviedb.org/3/movie/popular?page=1&api_key=add494e96808c55b3ee7f940c9d5e5b6 -> 200 (0ms)
+21:15:27.826 | INFO | Test teardown - Total logs: 2099 chars

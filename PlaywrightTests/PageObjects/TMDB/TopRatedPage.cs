@@ -1,0 +1,166 @@
+using Microsoft.Playwright;
+using PlaywrightTests.Utilities;
+
+namespace PlaywrightTests.PageObjects.TMDB;
+
+/// <summary>
+/// Top Rated Page - Shows top rated movies and TV shows
+/// </summary>
+public class TopRatedPage : TMDBBasePage
+{
+    private const string BaseUrl = "https://tmdb-discover.surge.sh/";
+
+    // Filter Options
+    private const string MovieTypeSelector = "button:has-text('Movies')";
+    private const string TVShowTypeSelector = "button:has-text('TV Shows')";
+
+    // Results
+    private const string ResultCardSelector = "[class*='card'], [class*='result-item']";
+    private const string ResultTitleSelector = "h3, h2, [class*='title']";
+    private const string ResultRatingSelector = "[class*='rating'], [class*='vote']";
+
+    // Pagination
+    private const string NextPageButtonSelector = "button:has-text('Next'), [aria-label*='next']";
+    private const string PreviousPageButtonSelector = "button:has-text('Prev'), [aria-label*='previous']";
+
+    public TopRatedPage(IPage page) : base(page)
+    {
+    }
+
+    /// <summary>
+    /// Navigate to Top Rated category
+    /// </summary>
+    public async Task NavigateToTopRatedAsync()
+    {
+        await NavigateToAsync(BaseUrl);
+        await WaitForLoadingToCompleteAsync();
+        Logger.Info("Navigated to Top Rated page");
+    }
+
+    /// <summary>
+    /// Verify page is on Top Rated category
+    /// </summary>
+    public async Task<bool> IsTopRatedPageAsync()
+    {
+        await WaitForLoadingToCompleteAsync();
+        var resultsCount = await GetResultsCountAsync();
+        return resultsCount > 0;
+    }
+
+    /// <summary>
+    /// Filter to Movies only on Top Rated page
+    /// </summary>
+    public async Task FilterToMoviesAsync()
+    {
+        await ClickAsync(MovieTypeSelector);
+        await WaitForLoadingToCompleteAsync();
+        Logger.Info("Filtered to Movies on Top Rated page");
+    }
+
+    /// <summary>
+    /// Filter to TV Shows only on Top Rated page
+    /// </summary>
+    public async Task FilterToTVShowsAsync()
+    {
+        await ClickAsync(TVShowTypeSelector);
+        await WaitForLoadingToCompleteAsync();
+        Logger.Info("Filtered to TV Shows on Top Rated page");
+    }
+
+    /// <summary>
+    /// Get all top rated items titles
+    /// </summary>
+    public async Task<List<string?>> GetTopRatedItemsAsync()
+    {
+        var titles = new List<string?>();
+        var titleLocators = Page.Locator(ResultCardSelector).Locator(ResultTitleSelector);
+        int count = await titleLocators.CountAsync();
+
+        for (int i = 0; i < count; i++)
+        {
+            var title = await titleLocators.Nth(i).TextContentAsync();
+            if (!string.IsNullOrEmpty(title))
+            {
+                titles.Add(title.Trim());
+            }
+        }
+
+        return titles;
+    }
+
+    /// <summary>
+    /// Get top rated items with ratings (sorted by rating)
+    /// </summary>
+    public async Task<List<(string? Title, double? Rating)>> GetTopRatedItemsWithRatingsAsync()
+    {
+        var items = new List<(string?, double?)>();
+        var cardLocators = Page.Locator(ResultCardSelector);
+        int count = await cardLocators.CountAsync();
+
+        for (int i = 0; i < count; i++)
+        {
+            var card = cardLocators.Nth(i);
+            var title = await card.Locator(ResultTitleSelector).TextContentAsync();
+            var ratingText = await card.Locator(ResultRatingSelector).TextContentAsync();
+
+            double? rating = null;
+            if (double.TryParse(ratingText?.Trim(), out double parsedRating))
+            {
+                rating = parsedRating;
+            }
+
+            items.Add((title?.Trim(), rating));
+        }
+
+        // Verify items are sorted by rating (descending)
+        return items.OrderByDescending(x => x.Item2).ToList();
+    }
+
+    /// <summary>
+    /// Navigate to next page of top rated items
+    /// </summary>
+    public async Task GoToNextPageAsync()
+    {
+        var nextButton = Page.Locator(NextPageButtonSelector);
+        if (await nextButton.IsEnabledAsync())
+        {
+            await nextButton.ClickAsync();
+            await WaitForLoadingToCompleteAsync();
+            Logger.Info("Navigated to next page of Top Rated");
+        }
+    }
+
+    /// <summary>
+    /// Navigate to previous page of top rated items
+    /// </summary>
+    public async Task GoToPreviousPageAsync()
+    {
+        var prevButton = Page.Locator(PreviousPageButtonSelector);
+        if (await prevButton.IsEnabledAsync())
+        {
+            await prevButton.ClickAsync();
+            await WaitForLoadingToCompleteAsync();
+            Logger.Info("Navigated to previous page of Top Rated");
+        }
+    }
+
+    /// <summary>
+    /// Verify top rated items are in descending order by rating
+    /// </summary>
+    public async Task<bool> VerifyRatingsSortedDescendingAsync()
+    {
+        var items = await GetTopRatedItemsWithRatingsAsync();
+
+        for (int i = 0; i < items.Count - 1; i++)
+        {
+            if (items[i].Rating < items[i + 1].Rating)
+            {
+                Logger.Warning($"Items not sorted correctly: {items[i].Title} ({items[i].Rating}) < {items[i + 1].Title} ({items[i + 1].Rating})");
+                return false;
+            }
+        }
+
+        Logger.Info("Top Rated items are correctly sorted in descending order");
+        return true;
+    }
+}

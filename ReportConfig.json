@@ -1,0 +1,26 @@
+{
+  "reportSettings": {
+    "enabled": true,
+    "format": "HTML",
+    "outputDirectory": "./Reports",
+    "fileNamePattern": "report_{HH}_{dd}_{MM}_{yyyy}.html",
+    "autoRetentionDays": 30,
+    "generateOnTestCompletion": true,
+    "includeScreenshots": true,
+    "includeLogsInReport": true,
+    "detailedFailureInfo": true
+  },
+  "reportContent": {
+    "includeSummary": true,
+    "includeTestDetails": true,
+    "includeEnvironmentInfo": true,
+    "includeTimingInfo": true,
+    "includeCategoryBreakdown": true,
+    "includeRecommendations": true
+  },
+  "styling": {
+    "theme": "modern",
+    "responsiveLayout": true,
+    "colorScheme": "light"
+  }
+}

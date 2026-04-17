@@ -1,0 +1,15 @@
+Test Execution Log - 2026-04-16 21:07:47
+--------------------------------------------------------------------------------
+
+
+21:07:47.041 | TEST START | Simple Test: Page Load Validation
+21:07:47.041 | STEP | [STEP 1] Navigate to Example domain
+21:07:47.241 | STEP | [STEP 2] Wait for page to load
+21:07:47.265 | STEP | [STEP 3] Verify page title
+21:07:47.280 | INFO | Page title: Example Domain
+21:07:47.281 | INFO [ASSERTION] | Assertion: Page has a title
+21:07:47.281 | INFO [ASSERTION] | Assertion: Title contains 'Example'
+21:07:47.282 | STEP | [STEP 4] Verify main heading is visible
+21:07:47.335 | INFO | Main heading: Example Domain
+21:07:47.335 | INFO [ASSERTION] | Assertion: Heading contains 'Example'
+21:07:47.336 | TEST PASSED | Simple Test

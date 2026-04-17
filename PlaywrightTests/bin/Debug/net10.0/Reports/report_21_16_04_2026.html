@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Execution Report - TMDB Discover</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .timestamp {
+            font-size: 0.95em;
+            opacity: 0.95;
+            margin-top: 10px;
+        }
+
+        .summary {
+            padding: 40px 20px;
+            background: #f9fafb;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .summary h2 {
+            margin-bottom: 25px;
+            color: #1f2937;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-item {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .summary-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-label {
+            font-size: 0.8em;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .summary-value.passed {
+            color: #10b981;
+        }
+
+        .summary-value.failed {
+            color: #ef4444;
+        }
+
+        .summary-value.warning {
+            color: #f59e0b;
+        }
+
+        .content {
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            font-weight: 600;
+        }
+
+        .test-result {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #d1d5db;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-result.passed {
+            background: #f0fdf4;
+            border-left-color: #10b981;
+        }
+
+        .test-result.failed {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .test-name {
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .test-status {
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .test-status.passed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .test-status.failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .details {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .details h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .details p {
+            color: #6b7280;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: width 0.3s ease;
+        }
+
+        .environment {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .environment h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .env-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .env-item:last-child {
+            border-bottom: none;
+        }
+
+        .env-label {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .env-value {
+            color: #6b7280;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer {
+            padding: 30px 20px;
+            background: #f3f4f6;
+            border-top: 2px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #6b7280;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .footer strong {
+            color: #667eea;
+        }
+
+        .highlight {
+            background: #fffbeb;
+            padding: 15px;
+            border-left: 4px solid #f59e0b;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .highlight strong {
+            color: #d97706;
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .summary h2 {
+                font-size: 1.4em;
+            }
+
+            .test-result {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .test-status {
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧪 Test Execution Report</h1>
+            <p class="timestamp">TMDB Discover - Automation Test Suite</p>
+            <p class="timestamp">Report Generated: April 16, 2026 at 21:36 PDT</p>
+        </header>
+
+        <section class="summary">
+            <h2>Execution Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span class="summary-label">Total Tests</span>
+                    <span class="summary-value">8</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">✓ Passed</span>
+                    <span class="summary-value passed">3</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">✗ Failed</span>
+                    <span class="summary-value failed">5</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Pass Rate</span>
+                    <span class="summary-value warning">37.5%</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Duration</span>
+                    <span class="summary-value">2m 15s</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 37.5%;">37.5% Pass Rate</div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="section">
+                <h3>📋 Test Results</h3>
+
+                <div class="test-result passed">
+                    <span class="test-name">TC-001: Filter by Popular Category</span>
+                    <span class="test-status passed">✓ PASSED</span>
+                </div>
+
+                <div class="test-result passed">
+                    <span class="test-name">TC-002: Filter by Trending Category</span>
+                    <span class="test-status passed">✓ PASSED</span>
+                </div>
+
+                <div class="test-result passed">
+                    <span class="test-name">TC-003: Filter by Newest Category</span>
+                    <span class="test-status passed">✓ PASSED</span>
+                </div>
+
+                <div class="test-result failed">
+                    <span class="test-name">TC-004: Filter by Top Rated Category</span>
+                    <span class="test-status failed">✗ FAILED</span>
+                </div>
+
+                <div class="test-result failed">
+                    <span class="test-name">TC-008: Filter by Movies Type</span>
+                    <span class="test-status failed">✗ FAILED</span>
+                </div>
+
+                <div class="test-result failed">
+                    <span class="test-name">TC-009: Filter by TV Shows Type</span>
+                    <span class="test-status failed">✗ FAILED</span>
+                </div>
+
+                <div class="test-result failed">
+                    <span class="test-name">TC-010: Toggle Between Movies and TV Shows</span>
+                    <span class="test-status failed">✗ FAILED</span>
+                </div>
+
+                <div class="test-result failed">
+                    <span class="test-name">All Categories Load Test</span>
+                    <span class="test-status failed">✗ FAILED</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📊 Test Details by Category</h3>
+
+                <div class="details">
+                    <h4>Category Pages Tests (CategoryPagesTests.cs)</h4>
+                    <p><strong>Status:</strong> 3 Passed, 5 Failed</p>
+                    <p><strong>Duration:</strong> 2 minutes 15 seconds</p>
+                    <p><strong>Description:</strong> Tests for TMDB Discover website category pages including Popular, Trending, Newest, and Top Rated categories. Also includes tests for Movies and TV Shows type filtering.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚠️ Key Findings</h3>
+
+                <div class="highlight">
+                    <strong>Selector Mismatches:</strong> Several tests failed due to HTML selectors not matching the actual website DOM structure. The selectors used in tests need to be updated to match the current TMDB Discover website design.
+                </div>
+
+                <div class="highlight">
+                    <strong>Successful Navigation:</strong> Category page navigation tests (TC-001, TC-002, TC-003) passed successfully, indicating proper Playwright setup and basic page interactions.
+                </div>
+
+                <div class="highlight">
+                    <strong>Type Filtering Issues:</strong> Tests for Movies/TV Shows type filtering are failing due to missing or updated button selectors on the website.
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🔧 Environment Information</h3>
+
+                <div class="environment">
+                    <h4>System Details</h4>
+                    <div class="env-item">
+                        <span class="env-label">OS:</span>
+                        <span class="env-value">Windows 10 Pro</span>
+                    </div>
+                    <div class="env-item">
+                        <span class="env-label">.NET Version:</span>
+                        <span class="env-value">.NET 10.0</span>
+                    </div>
+                    <div class="env-item">
+                        <span class="env-label">Test Framework:</span>
+                        <span class="env-value">NUnit + Playwright</span>
+                    </div>
+                    <div class="env-item">
+                        <span class="env-label">Browser:</span>
+                        <span class="env-value">Chromium</span>
+                    </div>
+                    <div class="env-item">
+                        <span class="env-label">Test Suite:</span>
+                        <span class="env-value">CategoryPagesTests</span>
+                    </div>
+                    <div class="env-item">
+                        <span class="env-label">Execution Mode:</span>
+                        <span class="env-value">Parallel (ParallelScope.Self)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📝 Recommendations</h3>
+
+                <div class="details">
+                    <h4>Next Steps</h4>
+                    <p>1. <strong>Update Selectors:</strong> Inspect the TMDB Discover website to identify current HTML structure and update test selectors accordingly.</p>
+                    <p>2. <strong>Review Page Objects:</strong> Verify that all page object selectors match the actual website DOM elements.</p>
+                    <p>3. <strong>Add Debugging:</strong> Enable screenshot capture on failures to help diagnose selector mismatches.</p>
+                    <p>4. <strong>Re-run Tests:</strong> After updating selectors, execute the full test suite again to achieve higher pass rates.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>📊 <strong>Test Execution Report</strong> - Generated with Playwright + NUnit Framework</p>
+            <p>Report Format: HTML | Naming Convention: report_{HH}_{dd}_{MM}_{yyyy}.html</p>
+            <p>Generated on: <strong>April 16, 2026 at 21:36:01 PDT</strong></p>
+            <p style="margin-top: 20px; font-size: 0.85em;">For questions or issues, please contact the QA team</p>
+        </footer>
+    </div>
+</body>
+</html>
