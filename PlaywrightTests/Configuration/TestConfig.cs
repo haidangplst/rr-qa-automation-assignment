@@ -3,10 +3,25 @@ using Microsoft.Playwright;
 namespace PlaywrightTests.Configuration;
 
 /// <summary>
+/// Browser type enumeration
+/// </summary>
+public enum BrowserType
+{
+    Chrome,
+    Firefox,
+    WebKit
+}
+
+/// <summary>
 /// Configuration class for Playwright test execution
 /// </summary>
 public class TestConfig
 {
+    /// <summary>
+    /// Selected browser type
+    /// </summary>
+    public static BrowserType SelectedBrowser { get; set; } = BrowserType.Chrome;
+
     /// <summary>
     /// Base URL for the application under test
     /// </summary>
@@ -25,7 +40,7 @@ public class TestConfig
     /// <summary>
     /// Browser headless mode
     /// </summary>
-    public static bool Headless { get; set; } = false;
+    public static bool Headless { get; set; } = true;
 
     /// <summary>
     /// Enable video recording for failed tests
@@ -52,6 +67,10 @@ public class TestConfig
     /// </summary>
     public static void LoadFromEnvironment()
     {
+        // Browser type: BROWSER_TYPE=Chrome|Firefox|WebKit
+        if (Enum.TryParse<BrowserType>(Environment.GetEnvironmentVariable("BROWSER_TYPE"), out var browserType))
+            SelectedBrowser = browserType;
+
         if (bool.TryParse(Environment.GetEnvironmentVariable("HEADLESS"), out var headless))
             Headless = headless;
 
@@ -70,6 +89,37 @@ public class TestConfig
     }
 
     /// <summary>
+    /// Get browser type name
+    /// </summary>
+    public static string GetBrowserTypeName() => SelectedBrowser.ToString();
+
+    /// <summary>
+    /// Get Chrome launch arguments
+    /// </summary>
+    public static string[] GetChromeLaunchArgs()
+    {
+        return new[]
+        {
+            "--disable-blink-features=AutomationControlled",
+            "--disable-dev-shm-usage",
+            "--no-first-run",
+            "--no-default-browser-check",
+            "--disable-gpu"
+        };
+    }
+
+    /// <summary>
+    /// Get Firefox launch arguments
+    /// </summary>
+    public static string[] GetFirefoxLaunchArgs()
+    {
+        return new[]
+        {
+            "-use-temp-profile"
+        };
+    }
+
+    /// <summary>
     /// Get Chrome launch options based on current configuration
     /// </summary>
     public static BrowserTypeLaunchOptions GetChromeLaunchOptions()
@@ -77,14 +127,44 @@ public class TestConfig
         return new BrowserTypeLaunchOptions
         {
             Headless = Headless,
-            Args = new[]
-            {
-                "--disable-blink-features=AutomationControlled",
-                "--disable-dev-shm-usage",
-                "--no-first-run",
-                "--no-default-browser-check",
-                "--disable-gpu"
-            }
+            Args = GetChromeLaunchArgs()
+        };
+    }
+
+    /// <summary>
+    /// Get Firefox launch options based on current configuration
+    /// </summary>
+    public static BrowserTypeLaunchOptions GetFirefoxLaunchOptions()
+    {
+        return new BrowserTypeLaunchOptions
+        {
+            Headless = Headless,
+            Args = GetFirefoxLaunchArgs()
+        };
+    }
+
+    /// <summary>
+    /// Get WebKit launch options based on current configuration
+    /// </summary>
+    public static BrowserTypeLaunchOptions GetWebKitLaunchOptions()
+    {
+        return new BrowserTypeLaunchOptions
+        {
+            Headless = Headless
+        };
+    }
+
+    /// <summary>
+    /// Get launch options for the selected browser
+    /// </summary>
+    public static BrowserTypeLaunchOptions GetBrowserLaunchOptions()
+    {
+        return SelectedBrowser switch
+        {
+            BrowserType.Chrome => GetChromeLaunchOptions(),
+            BrowserType.Firefox => GetFirefoxLaunchOptions(),
+            BrowserType.WebKit => GetWebKitLaunchOptions(),
+            _ => throw new ArgumentException($"Unknown browser type: {SelectedBrowser}")
         };
     }
 

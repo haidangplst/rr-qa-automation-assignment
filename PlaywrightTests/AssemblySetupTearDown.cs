@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using PlaywrightTests.Configuration;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests;
@@ -18,10 +19,13 @@ public class AssemblySetupTearDown
         {
             try
             {
+                var browserConfig = BrowserFactory.GetBrowserConfigurationName();
+
                 System.Console.WriteLine("\n");
                 System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-                System.Console.WriteLine("📊 GENERATING TEST EXECUTION REPORT...");
+                System.Console.WriteLine("📊 GENERATING TEST EXECUTION REPORT");
                 System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
+                System.Console.WriteLine($"Browser: {browserConfig}");
 
                 var reportGenerator = new EnhancedHTMLReportGenerator();
                 var reportPath = reportGenerator.GenerateReport();
@@ -40,3 +44,4 @@ public class AssemblySetupTearDown
         }
     }
 }
+

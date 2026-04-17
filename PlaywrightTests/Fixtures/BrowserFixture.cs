@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using NUnit.Framework;
+using PlaywrightTests.Configuration;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Fixtures;
@@ -21,18 +22,27 @@ public class BrowserFixture
     {
         try
         {
-            _playwright = await Playwright.CreateAsync();
-            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-            {
-                Headless = true, // Set to false to see the browser
-            });
+            // Load configuration from environment
+            TestConfig.LoadFromEnvironment();
 
-            _context = await _browser.NewContextAsync();
+            Console.WriteLine("\n═══════════════════════════════════════════════════════════════");
+            Console.WriteLine("🔧 TEST CONFIGURATION");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════");
+            Console.WriteLine($"Browser: {TestConfig.GetBrowserTypeName()}");
+            Console.WriteLine($"Headless: {TestConfig.Headless}");
+            Console.WriteLine($"Base URL: {TestConfig.BaseUrl}");
+            Console.WriteLine($"Viewport: {TestConfig.ViewportWidth}x{TestConfig.ViewportHeight}");
+            Console.WriteLine("═══════════════════════════════════════════════════════════════\n");
+
+            _playwright = await Playwright.CreateAsync();
+            _browser = await BrowserFactory.CreateBrowserAsync(_playwright);
+
+            _context = await _browser.NewContextAsync(TestConfig.GetContextOptions());
             _page = await _context.NewPageAsync();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in BrowserFixture.OneTimeSetUp: {ex.Message}");
+            Console.WriteLine($"❌ Error in BrowserFixture.OneTimeSetUp: {ex.Message}");
             throw;
         }
     }
@@ -52,7 +62,7 @@ public class BrowserFixture
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in BrowserFixture.SetUp: {ex.Message}");
+            Console.WriteLine($"❌ Error in BrowserFixture.SetUp: {ex.Message}");
         }
     }
 
@@ -68,7 +78,7 @@ public class BrowserFixture
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in BrowserFixture.TearDown: {ex.Message}");
+            Console.WriteLine($"❌ Error in BrowserFixture.TearDown: {ex.Message}");
         }
     }
 
@@ -78,14 +88,14 @@ public class BrowserFixture
         try
         {
             // Generate report after all tests complete
-            Console.WriteLine("Generating test report...");
+            Console.WriteLine("\n📊 Generating test report...");
             var reportGenerator = new EnhancedHTMLReportGenerator();
             var reportPath = reportGenerator.GenerateReport();
-            Console.WriteLine($"Report generated: {reportPath}");
+            Console.WriteLine($"✅ Report generated: {reportPath}\n");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error generating report: {ex.Message}");
+            Console.WriteLine($"❌ Error generating report: {ex.Message}");
         }
 
         try
@@ -101,12 +111,14 @@ public class BrowserFixture
             if (_browser != null)
             {
                 await _browser.CloseAsync();
+                Console.WriteLine($"✅ {TestConfig.GetBrowserTypeName()} browser closed\n");
             }
             _playwright?.Dispose();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in BrowserFixture.OneTimeTearDown: {ex.Message}");
+            Console.WriteLine($"❌ Error in BrowserFixture.OneTimeTearDown: {ex.Message}");
         }
     }
 }
+
