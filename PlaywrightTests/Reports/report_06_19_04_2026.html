@@ -401,30 +401,30 @@ body {
     <div class="container">
         <header class="header">
             <h1>🧪 Enhanced Test Execution Report</h1>
-            <p class="timestamp">Generated: 2026-04-19 06:43:05</p>
+            <p class="timestamp">Generated: 2026-04-19 06:50:38</p>
         </header>
         <section class="summary">
             <h2>Execution Summary</h2>
             <div class="summary-grid">
                 <div class="summary-item">
                     <span class="label">Total Tests</span>
-                    <span class="value">7</span>
+                    <span class="value">9</span>
                 </div>
                 <div class="summary-item">
                     <span class="label">✓ Passed</span>
-                    <span class="value passed">7</span>
+                    <span class="value passed">6</span>
                 </div>
                 <div class="summary-item">
                     <span class="label">✗ Failed</span>
-                    <span class="value failed">0</span>
+                    <span class="value failed">3</span>
                 </div>
                 <div class="summary-item">
                     <span class="label">Pass Rate</span>
-                    <span class="value">100%</span>
+                    <span class="value">66%</span>
                 </div>
                 <div class="summary-item">
                     <span class="label">Duration</span>
-                    <span class="value">3.33s</span>
+                    <span class="value">0.84s</span>
                 </div>
             </div>
         </section>
@@ -432,15 +432,15 @@ body {
             <h2>Test Execution Details</h2>
             <div class="test-card">
                 <div class="test-header passed">
-                    <h3>✓ TC_001_1_Validate_ThePagination</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">0.13s</span>
+                    <h3>✓ TC_API_001_Validate_LocalStorage_SetAndGet</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.05s</span>
                 </div>
                 <div class="test-info">
                     <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:42:32.842</p>
-                    <p><strong>End Time:</strong> 06:42:32.971</p>
-                    <p><strong>Duration:</strong> 0.13 seconds</p>
+                    <p><strong>Start Time:</strong> 06:50:08.374</p>
+                    <p><strong>End Time:</strong> 06:50:08.424</p>
+                    <p><strong>Duration:</strong> 0.05 seconds</p>
                 </div>
                 <div class="steps-section">
                     <h4>Execution Steps</h4>
@@ -448,91 +448,71 @@ body {
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 1</span>
-                                <span class="step-description">Wait for Discovery Option fields</span>
-                                <span class="step-duration">0.06s</span>
+                                <span class="step-description">Set item in localStorage</span>
+                                <span class="step-duration">0.03s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:08.405] Set localStorage: testKey = testValue</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 2</span>
-                                <span class="step-description">Verify navigation bar menu</span>
-                                <span class="step-duration">0.02s</span>
+                                <span class="step-description">Get item from localStorage and verify</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:08.411] Retrieved value: testValue</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 3</span>
-                                <span class="step-description">Verify search box is displayed</span>
+                                <span class="step-description">Assert localStorage contains key</span>
                                 <span class="step-duration">0.01s</span>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 4</span>
-                                <span class="step-description">Verify default page is displayed</span>
-                                <span class="step-duration">0.01s</span>
+                                <span class="step-description">Assert localStorage value matches</span>
+                                <span class="step-duration">0.00s</span>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 5</span>
-                                <span class="step-description">Validate page selector numbers</span>
-                                <span class="step-duration">0.03s</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card">
-                <div class="test-header passed">
-                    <h3>✓ TC_001_Validate_TheUIDisplayedInDefaulePage</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">0.08s</span>
-                </div>
-                <div class="test-info">
-                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:42:43.374</p>
-                    <p><strong>End Time:</strong> 06:42:43.451</p>
-                    <p><strong>Duration:</strong> 0.08 seconds</p>
-                </div>
-                <div class="steps-section">
-                    <h4>Execution Steps</h4>
-                    <div class="steps-list">
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 1</span>
-                                <span class="step-description">Wait for Discovery Option fields to be displayed</span>
-                                <span class="step-duration">0.05s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 2</span>
-                                <span class="step-description">Verify navigation bar menu</span>
-                                <span class="step-duration">0.02s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 3</span>
-                                <span class="step-description">Verify search box is displayed</span>
+                                <span class="step-description">Clean up - remove localStorage item</span>
                                 <span class="step-duration">0.00s</span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="logs-section">
+                    <h4>Full Test Logs</h4>
+                    <div class="logs-container">
+                        <div class="log-line">[06:50:08.405] Set localStorage: testKey = testValue</div>
+                        <div class="log-line">[06:50:08.412] Retrieved value: testValue</div>
+                    </div>
+                </div>
             </div>
             <div class="test-card">
                 <div class="test-header passed">
-                    <h3>✓ TC_002_FilterByPopularCategory</h3>
-                    <span class="category">CategoryPages</span>
-                    <span class="duration">0.64s</span>
+                    <h3>✓ TC_API_002_Validate_SessionStorage_Operations</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.04s</span>
                 </div>
                 <div class="test-info">
                     <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:42:45.905</p>
-                    <p><strong>End Time:</strong> 06:42:46.547</p>
-                    <p><strong>Duration:</strong> 0.64 seconds</p>
+                    <p><strong>Start Time:</strong> 06:50:11.860</p>
+                    <p><strong>End Time:</strong> 06:50:11.898</p>
+                    <p><strong>Duration:</strong> 0.04 seconds</p>
                 </div>
                 <div class="steps-section">
                     <h4>Execution Steps</h4>
@@ -540,40 +520,393 @@ body {
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 1</span>
+                                <span class="step-description">Set item in sessionStorage</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:11.876] Set sessionStorage: sessionKey = sessionValue</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 2</span>
+                                <span class="step-description">Get item from sessionStorage and verify</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:11.884] Retrieved value: sessionValue</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 3</span>
+                                <span class="step-description">Clear sessionStorage</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:11.892] Cleared all sessionStorage</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 4</span>
+                                <span class="step-description">Verify item was removed</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:11.897] ✓ SessionStorage cleared successfully</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logs-section">
+                    <h4>Full Test Logs</h4>
+                    <div class="logs-container">
+                        <div class="log-line">[06:50:11.876] Set sessionStorage: sessionKey = sessionValue</div>
+                        <div class="log-line">[06:50:11.884] Retrieved value: sessionValue</div>
+                        <div class="log-line">[06:50:11.892] Cleared all sessionStorage</div>
+                        <div class="log-line">[06:50:11.897] ✓ SessionStorage cleared successfully</div>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card">
+                <div class="test-header passed">
+                    <h3>✓ TC_API_003_Validate_Navigator_Properties</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.02s</span>
+                </div>
+                <div class="test-info">
+                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:15.433</p>
+                    <p><strong>End Time:</strong> 06:50:15.449</p>
+                    <p><strong>Duration:</strong> 0.02 seconds</p>
+                </div>
+                <div class="steps-section">
+                    <h4>Execution Steps</h4>
+                    <div class="steps-list">
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 1</span>
+                                <span class="step-description">Get user agent</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:15.439] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 2</span>
+                                <span class="step-description">Assert user agent is not empty</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:15.439] ✓ User agent is not empty</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 3</span>
+                                <span class="step-description">Get browser language</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:15.441] Language: en-US</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 4</span>
+                                <span class="step-description">Check if cookies are enabled</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:15.446] Cookies Enabled: True</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 5</span>
+                                <span class="step-description">Check online status</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:15.448] Online: True</li>
+                                    <li>[06:50:15.448] ✓ Browser is online</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logs-section">
+                    <h4>Full Test Logs</h4>
+                    <div class="logs-container">
+                        <div class="log-line">[06:50:15.439] User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36</div>
+                        <div class="log-line">[06:50:15.439] ✓ User agent is not empty</div>
+                        <div class="log-line">[06:50:15.441] Language: en-US</div>
+                        <div class="log-line">[06:50:15.446] Cookies Enabled: True</div>
+                        <div class="log-line">[06:50:15.448] Online: True</div>
+                        <div class="log-line">[06:50:15.448] ✓ Browser is online</div>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card">
+                <div class="test-header passed">
+                    <h3>✓ TC_API_006_Validate_Cookie_Operations</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.04s</span>
+                </div>
+                <div class="test-info">
+                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:26.643</p>
+                    <p><strong>End Time:</strong> 06:50:26.678</p>
+                    <p><strong>Duration:</strong> 0.04 seconds</p>
+                </div>
+                <div class="steps-section">
+                    <h4>Execution Steps</h4>
+                    <div class="steps-list">
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 1</span>
+                                <span class="step-description">Get all cookies</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:26.653] Found 0 cookies</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 2</span>
+                                <span class="step-description">Set a test cookie</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:26.663] Set cookie: testCookie = testValue123</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 3</span>
+                                <span class="step-description">Assert cookie exists</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:26.670] ✓ Cookie exists</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 4</span>
+                                <span class="step-description">Assert cookie has correct value</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:26.673] ✓ Cookie value is correct</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 5</span>
+                                <span class="step-description">Clean up - clear all cookies</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:26.678] Cleared all cookies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logs-section">
+                    <h4>Full Test Logs</h4>
+                    <div class="logs-container">
+                        <div class="log-line">[06:50:26.653] Found 0 cookies</div>
+                        <div class="log-line">[06:50:26.663] Set cookie: testCookie = testValue123</div>
+                        <div class="log-line">[06:50:26.670] ✓ Cookie exists</div>
+                        <div class="log-line">[06:50:26.673] ✓ Cookie value is correct</div>
+                        <div class="log-line">[06:50:26.678] Cleared all cookies</div>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card">
+                <div class="test-header passed">
+                    <h3>✓ TC_API_008_Validate_Custom_JavaScript_Execution</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.02s</span>
+                </div>
+                <div class="test-info">
+                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:33.928</p>
+                    <p><strong>End Time:</strong> 06:50:33.944</p>
+                    <p><strong>Duration:</strong> 0.02 seconds</p>
+                </div>
+                <div class="steps-section">
+                    <h4>Execution Steps</h4>
+                    <div class="steps-list">
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 1</span>
+                                <span class="step-description">Execute custom JavaScript to get page height</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:33.938] Page height: 1080px</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 2</span>
+                                <span class="step-description">Assert page height is greater than 0</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:33.938] ✓ Page height is valid: 1080px</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 3</span>
+                                <span class="step-description">Execute JavaScript expression assertion</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:33.941] ✓ document.body exists</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 4</span>
+                                <span class="step-description">Assert DOM elements exist</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:33.944] ✓ Page has DOM elements</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logs-section">
+                    <h4>Full Test Logs</h4>
+                    <div class="logs-container">
+                        <div class="log-line">[06:50:33.938] Page height: 1080px</div>
+                        <div class="log-line">[06:50:33.938] ✓ Page height is valid: 1080px</div>
+                        <div class="log-line">[06:50:33.941] ✓ document.body exists</div>
+                        <div class="log-line">[06:50:33.944] ✓ Page has DOM elements</div>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card">
+                <div class="test-header passed">
+                    <h3>✓ TC_API_009_Validate_LocalStorage_Persistence</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.63s</span>
+                </div>
+                <div class="test-info">
+                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:37.346</p>
+                    <p><strong>End Time:</strong> 06:50:37.973</p>
+                    <p><strong>Duration:</strong> 0.63 seconds</p>
+                </div>
+                <div class="steps-section">
+                    <h4>Execution Steps</h4>
+                    <div class="steps-list">
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 1</span>
+                                <span class="step-description">Set localStorage on home page</span>
+                                <span class="step-duration">0.00s</span>
+                            </div>
+                            <div class="step-logs">
+                                <div class="logs-header">Step Logs:</div>
+                                <ul>
+                                    <li>[06:50:37.351] Set localStorage: persistentKey = persistentValue</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 2</span>
                                 <span class="step-description">Navigate to Popular page</span>
-                                <span class="step-duration">0.63s</span>
+                                <span class="step-duration">0.62s</span>
                             </div>
                             <div class="step-logs">
                                 <div class="logs-header">Step Logs:</div>
                                 <ul>
-                                    <li>[06:42:46.534] Successfully navigated to Popular page</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 2</span>
-                                <span class="step-description">Verify Popular page loaded</span>
-                                <span class="step-duration">0.01s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:42:46.542] Page loaded: True</li>
+                                    <li>[06:50:37.968] Navigated to Popular page</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 3</span>
-                                <span class="step-description">Get popular items</span>
+                                <span class="step-description">Verify localStorage persisted after navigation</span>
                                 <span class="step-duration">0.00s</span>
                             </div>
                             <div class="step-logs">
                                 <div class="logs-header">Step Logs:</div>
                                 <ul>
-                                    <li>[06:42:46.546] Found 20 popular items</li>
+                                    <li>[06:50:37.971] ✓ LocalStorage persisted across navigation</li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 4</span>
+                                <span class="step-description">Clean up localStorage</span>
+                                <span class="step-duration">0.00s</span>
                             </div>
                         </div>
                     </div>
@@ -581,23 +914,24 @@ body {
                 <div class="logs-section">
                     <h4>Full Test Logs</h4>
                     <div class="logs-container">
-                        <div class="log-line">[06:42:46.534] Successfully navigated to Popular page</div>
-                        <div class="log-line">[06:42:46.542] Page loaded: True</div>
-                        <div class="log-line">[06:42:46.546] Found 20 popular items</div>
+                        <div class="log-line">[06:50:37.351] Set localStorage: persistentKey = persistentValue</div>
+                        <div class="log-line">[06:50:37.968] Navigated to Popular page</div>
+                        <div class="log-line">[06:50:37.971] ✓ LocalStorage persisted across navigation</div>
                     </div>
                 </div>
             </div>
             <div class="test-card">
-                <div class="test-header passed">
-                    <h3>✓ TC_005_Validate_CannotDirectAccessUrlToPopularPage</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">0.30s</span>
+                <div class="test-header failed">
+                    <h3>✗ TC_API_004_Validate_Window_APIs</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.03s</span>
                 </div>
                 <div class="test-info">
-                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:42:55.356</p>
-                    <p><strong>End Time:</strong> 06:42:55.657</p>
-                    <p><strong>Duration:</strong> 0.30 seconds</p>
+                    <p><strong>Status:</strong> <span class="status-failed">FAILED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:18.813</p>
+                    <p><strong>End Time:</strong> 06:50:18.845</p>
+                    <p><strong>Duration:</strong> 0.03 seconds</p>
+                    <p><strong>Error:</strong> <span class="error-message">The given key &#39;width&#39; was not present in the dictionary.</span></p>
                 </div>
                 <div class="steps-section">
                     <h4>Execution Steps</h4>
@@ -605,52 +939,33 @@ body {
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 1</span>
-                                <span class="step-description">Navigate to Popular page directly</span>
-                                <span class="step-duration">0.27s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:42:55.624] Navigated to: https://tmdb-discover.surge.sh/popular</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 2</span>
-                                <span class="step-description">Verify page is not found</span>
+                                <span class="step-description">Get window size</span>
                                 <span class="step-duration">0.03s</span>
                             </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:42:55.625] Current URL: https://tmdb-discover.surge.sh/popular</li>
-                                    <li>[06:42:55.657] Page not found verification successful</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="logs-section">
-                    <h4>Full Test Logs</h4>
-                    <div class="logs-container">
-                        <div class="log-line">[06:42:55.624] Navigated to: https://tmdb-discover.surge.sh/popular</div>
-                        <div class="log-line">[06:42:55.625] Current URL: https://tmdb-discover.surge.sh/popular</div>
-                        <div class="log-line">[06:42:55.657] Page not found verification successful</div>
+                <div class="stacktrace-section">
+                    <h4>Stack Trace</h4>
+                    <div class="stacktrace-container">
+                        <pre>   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at PlaywrightTests.PageObjects.TMDB.BrowserAPIHelper.GetWindowSizeAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\BrowserAPIHelper.cs:line 247
+   at PlaywrightTests.Tests.TMDB.BrowserAPITests.TC_API_004_Validate_Window_APIs() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\BrowserAPITests.cs:line 195</pre>
                     </div>
                 </div>
             </div>
             <div class="test-card">
-                <div class="test-header passed">
-                    <h3>✓ TC_006_SearchByTitle_ExactMatch</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">0.11s</span>
+                <div class="test-header failed">
+                    <h3>✗ TC_API_005_Validate_Document_APIs</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.01s</span>
                 </div>
                 <div class="test-info">
-                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:42:58.130</p>
-                    <p><strong>End Time:</strong> 06:42:58.243</p>
-                    <p><strong>Duration:</strong> 0.11 seconds</p>
+                    <p><strong>Status:</strong> <span class="status-failed">FAILED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:22.769</p>
+                    <p><strong>End Time:</strong> 06:50:22.782</p>
+                    <p><strong>Duration:</strong> 0.01 seconds</p>
+                    <p><strong>Error:</strong> <span class="error-message">Document title assertion failed (Verify TMDB in title): Expected to contain &#39;TMDB&#39; but got &#39;Discover&#39;</span></p>
                 </div>
                 <div class="steps-section">
                     <h4>Execution Steps</h4>
@@ -658,197 +973,34 @@ body {
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 1</span>
-                                <span class="step-description">Wait for page to load</span>
-                                <span class="step-duration">0.05s</span>
+                                <span class="step-description">Assert document ready state is complete</span>
+                                <span class="step-duration">0.01s</span>
                             </div>
                             <div class="step-logs">
                                 <div class="logs-header">Step Logs:</div>
                                 <ul>
-                                    <li>[06:42:58.177] Home page loaded successfully</li>
+                                    <li>[06:50:22.776] ✓ Document ready state is complete</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
                                 <span class="step-number">Step 2</span>
-                                <span class="step-description">Search for &#39;Inception&#39;</span>
-                                <span class="step-duration">0.02s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 3</span>
-                                <span class="step-description">Verify search was performed</span>
-                                <span class="step-duration">0.01s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:42:58.204] Search value: Inception</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 4</span>
-                                <span class="step-description">Get results count and verify items</span>
-                                <span class="step-duration">0.04s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:42:58.209] Found 20 results</li>
-                                    <li>[06:42:58.243] Verified 20 items contain &#39;inception&#39;</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="logs-section">
-                    <h4>Full Test Logs</h4>
-                    <div class="logs-container">
-                        <div class="log-line">[06:42:58.177] Home page loaded successfully</div>
-                        <div class="log-line">[06:42:58.204] Search value: Inception</div>
-                        <div class="log-line">[06:42:58.209] Found 20 results</div>
-                        <div class="log-line">[06:42:58.243] Verified 20 items contain &#39;inception&#39;</div>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card">
-                <div class="test-header passed">
-                    <h3>✓ TC_007_Validate_TheItemsHasImageErrorDisplayed</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">0.12s</span>
-                </div>
-                <div class="test-info">
-                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:43:00.705</p>
-                    <p><strong>End Time:</strong> 06:43:00.824</p>
-                    <p><strong>Duration:</strong> 0.12 seconds</p>
-                </div>
-                <div class="steps-section">
-                    <h4>Execution Steps</h4>
-                    <div class="steps-list">
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 1</span>
-                                <span class="step-description">Wait for page to load</span>
-                                <span class="step-duration">0.05s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 2</span>
-                                <span class="step-description">Search for &#39;inception&#39;</span>
-                                <span class="step-duration">0.02s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 3</span>
-                                <span class="step-description">Verify search was performed</span>
-                                <span class="step-duration">0.01s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:43:00.777] Search value: inception</li>
-                                    <li>[06:43:00.781] Found 20 results</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 4</span>
-                                <span class="step-description">Get all search result items</span>
-                                <span class="step-duration">0.04s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:43:00.817] Total items retrieved: 20</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 5</span>
-                                <span class="step-description">Verify items have no image errors</span>
-                                <span class="step-duration">0.01s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:43:00.824] ✓ All 20 items have valid images</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="logs-section">
-                    <h4>Full Test Logs</h4>
-                    <div class="logs-container">
-                        <div class="log-line">[06:43:00.777] Search value: inception</div>
-                        <div class="log-line">[06:43:00.781] Found 20 results</div>
-                        <div class="log-line">[06:43:00.817] Total items retrieved: 20</div>
-                        <div class="log-line">[06:43:00.824] ✓ All 20 items have valid images</div>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card">
-                <div class="test-header passed">
-                    <h3>✓ TC_008_Validate_NoItemsDisplayed</h3>
-                    <span class="category">Smoke</span>
-                    <span class="duration">1.95s</span>
-                </div>
-                <div class="test-info">
-                    <p><strong>Status:</strong> <span class="status-passed">PASSED</span></p>
-                    <p><strong>Start Time:</strong> 06:43:03.318</p>
-                    <p><strong>End Time:</strong> 06:43:05.268</p>
-                    <p><strong>Duration:</strong> 1.95 seconds</p>
-                </div>
-                <div class="steps-section">
-                    <h4>Execution Steps</h4>
-                    <div class="steps-list">
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 1</span>
-                                <span class="step-description">Wait for page to load</span>
-                                <span class="step-duration">0.06s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 2</span>
-                                <span class="step-description">Search for invalid term &#39;prty&#39;</span>
-                                <span class="step-duration">0.02s</span>
-                            </div>
-                        </div>
-                        <div class="step step-passed">
-                            <div class="step-header">
-                                <span class="step-number">Step 3</span>
-                                <span class="step-description">Verify search was performed</span>
+                                <span class="step-description">Get document title</span>
                                 <span class="step-duration">0.00s</span>
                             </div>
                             <div class="step-logs">
                                 <div class="logs-header">Step Logs:</div>
                                 <ul>
-                                    <li>[06:43:03.404] Search value: prty</li>
+                                    <li>[06:50:22.779] Document Title: Discover</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="step step-passed">
                             <div class="step-header">
-                                <span class="step-number">Step 4</span>
-                                <span class="step-description">Verify no results are displayed</span>
-                                <span class="step-duration">1.86s</span>
-                            </div>
-                            <div class="step-logs">
-                                <div class="logs-header">Step Logs:</div>
-                                <ul>
-                                    <li>[06:43:05.266] Results count: 0</li>
-                                    <li>[06:43:05.268] ✓ No results as expected</li>
-                                </ul>
+                                <span class="step-number">Step 3</span>
+                                <span class="step-description">Assert document title contains &#39;TMDB&#39;</span>
+                                <span class="step-duration">0.00s</span>
                             </div>
                         </div>
                     </div>
@@ -856,15 +1008,55 @@ body {
                 <div class="logs-section">
                     <h4>Full Test Logs</h4>
                     <div class="logs-container">
-                        <div class="log-line">[06:43:03.404] Search value: prty</div>
-                        <div class="log-line">[06:43:05.266] Results count: 0</div>
-                        <div class="log-line">[06:43:05.268] ✓ No results as expected</div>
+                        <div class="log-line">[06:50:22.776] ✓ Document ready state is complete</div>
+                        <div class="log-line">[06:50:22.779] Document Title: Discover</div>
+                    </div>
+                </div>
+                <div class="stacktrace-section">
+                    <h4>Stack Trace</h4>
+                    <div class="stacktrace-container">
+                        <pre>   at PlaywrightTests.PageObjects.TMDB.BrowserAPIHelper.AssertDocumentTitleContainsAsync(String expectedText, String context) in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\BrowserAPIHelper.cs:line 389
+   at PlaywrightTests.Tests.TMDB.BrowserAPITests.TC_API_005_Validate_Document_APIs() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\BrowserAPITests.cs:line 270</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card">
+                <div class="test-header failed">
+                    <h3>✗ TC_API_007_Validate_Page_Performance</h3>
+                    <span class="category">BrowserAPI</span>
+                    <span class="duration">0.01s</span>
+                </div>
+                <div class="test-info">
+                    <p><strong>Status:</strong> <span class="status-failed">FAILED</span></p>
+                    <p><strong>Start Time:</strong> 06:50:29.988</p>
+                    <p><strong>End Time:</strong> 06:50:29.999</p>
+                    <p><strong>Duration:</strong> 0.01 seconds</p>
+                    <p><strong>Error:</strong> <span class="error-message">The given key &#39;loadEventEnd&#39; was not present in the dictionary.</span></p>
+                </div>
+                <div class="steps-section">
+                    <h4>Execution Steps</h4>
+                    <div class="steps-list">
+                        <div class="step step-passed">
+                            <div class="step-header">
+                                <span class="step-number">Step 1</span>
+                                <span class="step-description">Get performance timing data</span>
+                                <span class="step-duration">0.01s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stacktrace-section">
+                    <h4>Stack Trace</h4>
+                    <div class="stacktrace-container">
+                        <pre>   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at PlaywrightTests.PageObjects.TMDB.BrowserAPIHelper.GetPerformanceTimingAsync() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Utilities\BrowserAPIHelper.cs:line 498
+   at PlaywrightTests.Tests.TMDB.BrowserAPITests.TC_API_007_Validate_Page_Performance() in C:\Users\Dang Nguyen\Desktop\automation test\rr-qa-automation-assignment\PlaywrightTests\Tests\TMDB\BrowserAPITests.cs:line 370</pre>
                     </div>
                 </div>
             </div>
         </section>
         <footer class="footer">
-            <p>Report generated: 2026-04-19 06:43:05</p>
+            <p>Report generated: 2026-04-19 06:50:38</p>
             <p>Enhanced Test Execution Report with Step-by-Step Details</p>
         </footer>
     </div>
