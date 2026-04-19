@@ -1,7 +1,6 @@
-using Microsoft.Playwright.NUnit;
-using NUnit.Framework;
-using PlaywrightTests.PageObjects.TMDB;
+using Microsoft.Playwright;
 using PlaywrightTests.BaseTests;
+using PlaywrightTests.PageObjects.TMDB;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
@@ -9,10 +8,11 @@ namespace PlaywrightTests.Tests.TMDB;
 [Category("Smoke")]
 [Parallelizable(ParallelScope.All)]
 [TestFixture]
-public class CategoryPagesTests : PlaywrightPageTest
+public class PopularPagesTests : PlaywrightPageTest
 {
     [Test]
     [Category("CategoryPagesTests")]
+
     
     public async Task TC_001_FilterByPopularCategory()
     {
@@ -73,17 +73,16 @@ public class CategoryPagesTests : PlaywrightPageTest
         try
         {
             var popularPage = new PopularPage(Page);
+            var homePage = new TMDBHomePage(Page);
 
             Logger.Step("1", "Navigate to Popular page");
             await popularPage.NavigateToPopularAsync();
 
             Logger.Step("2", "Click on Movies type filter");
-            await popularPage.FilterToMoviesAsync();
-
-
+            await homePage.FilterToMoviesAsync();
 
             Logger.Step("2", "Click on TV Shows type filter");
-            await popularPage.FilterToTVShowsAsync();
+            await homePage.FilterToTVShowsAsync();
 
             Logger.Step("3", "Verify results displayed");
             var resultsCount = await popularPage.GetResultsCountAsync();
@@ -108,22 +107,23 @@ public class CategoryPagesTests : PlaywrightPageTest
         try
         {
             var popularPage = new PopularPage(Page);
+            var homePage = new TMDBHomePage(Page);
 
             Logger.Step("1", "Navigate to Popular page");
             await popularPage.NavigateToPopularAsync();
 
             Logger.Step("2", "Filter by Movies");
-            await popularPage.FilterToMoviesAsync();
+            await homePage.FilterToMoviesAsync();
             var moviesCount = await popularPage.GetResultsCountAsync();
             Logger.Info($"Movies results: {moviesCount}");
 
             Logger.Step("3", "Filter by TV Shows");
-            await popularPage.FilterToTVShowsAsync();
+            await homePage.FilterToTVShowsAsync();
             var tvShowsCount = await popularPage.GetResultsCountAsync();
             Logger.Info($"TV Shows results: {tvShowsCount}");
 
             Logger.Step("4", "Toggle back to Movies");
-            await popularPage.FilterToMoviesAsync();
+            await homePage.FilterToMoviesAsync();
             var moviesCountAgain = await popularPage.GetResultsCountAsync();
 
             Logger.Assert(moviesCount > 0 && tvShowsCount > 0, "Both filters return results");
@@ -136,4 +136,159 @@ public class CategoryPagesTests : PlaywrightPageTest
             throw;
         }
     }
+
+    [Test]
+    [Category("CategoryPages")]
+    public async Task TC_011_VerifyCannotDirectAccessUrlToPopularPage()
+    {
+        Logger.TestStart("TC-011: VerifyCannotDirectAccessUrlToPopularPage");
+
+        try
+        {
+            var popularPage = new PopularPage(Page);
+            Logger.Step("1", "Navigate to Example domain");
+            await Page.GotoAsync("https://tmdb-discover.surge.sh/popular");
+            Logger.Step("2", "Verify URL");
+            var url = Page.Url;
+            Logger.Info($"Current URL: {url}");
+            await popularPage.VerifyThePageIsNotFoundAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-011", false, ex.Message);
+            throw;
+        }
+    }
+
+    [Test]
+    [Category("TitleSearch")]
+    [Category("Smoke")]
+    public async Task TC_005_SearchByTitle_ExactMatch()
+    {
+        var searchTerm = "inception";
+        var _homePage = new TMDBHomePage(Page);
+
+        Logger.TestStart("TC-005: Search by Title - Exact Match");
+        await _homePage!.NavigateToHomeAsync();
+
+        var searchTitle = "Inception";
+        Logger.Step("1", $"Search for '{searchTitle}'");
+        await _homePage.SearchByTitleAsync(searchTitle);
+
+        Logger.Step("2", "Verify search was performed");
+        var searchValue = await _homePage.GetSearchValueAsync();
+        Logger.Assert(searchValue?.Contains(searchTitle) ?? false, "Search input contains title");
+
+        var resultsCount = await _homePage.GetResultsCountAsync();
+        Logger.Info($"Search returned {resultsCount} results");
+        var items = await _homePage.VerifyResultsItemsDescriptionAsync(searchTerm);
+        Logger.Step("4", "Verify results displayed");
+    }
+
+    [Test]
+    [Category("TitleSearch")]
+    [Category("Smoke")]
+    public async Task TC_005_VerifyAndTheItemsHasImageErrorDisplayed()
+    {
+        var searchTitle = "inception";
+        var _homePage = new TMDBHomePage(Page);
+
+        Logger.TestStart("TC-005: Verify Items Have No Image Errors");
+
+        try
+        {
+            await _homePage!.NavigateToHomeAsync();
+
+            Logger.Step("1", $"Search for '{searchTitle}'");
+            await _homePage.SearchByTitleAsync(searchTitle);
+
+            Logger.Step("2", "Verify search was performed");
+            var searchValue = await _homePage.GetSearchValueAsync();
+            Logger.Assert(searchValue?.Contains(searchTitle) ?? false, "Search input contains title");
+
+            var resultsCount = await _homePage.GetResultsCountAsync();
+            Logger.Info($"Search returned {resultsCount} results");
+
+            Logger.Step("3", "Get all search result items");
+            var items = await _homePage.VerifyResultsItemsDescriptionAsync(searchTitle);
+            Logger.Info($"Total items retrieved: {items.Count}");
+
+            Logger.Step("4", "Verify items have no image errors");
+            var itemsError = await _homePage.VerifyResultsItemsErrorimageAsync(items);
+
+            // Check if there are any items with error images
+            if (itemsError.Count > 0)
+            {
+                var errorMessage = $"Found {itemsError.Count} item(s) with image errors: {string.Join(", ", itemsError.Take(5))}";
+                Logger.Error(errorMessage);
+                Logger.TestEnd("TC-005", false, errorMessage);
+                Assert.Fail(errorMessage);
+            }
+            else
+            {
+                Logger.Info($"✓ All {items.Count} items have valid images - no errors found!");
+                Logger.TestEnd("TC-005", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-005", false, ex.Message);
+            throw;
+        }
+    }
+
+    [Test]
+    [Category("TitleSearch")]
+    [Category("Smoke")]
+    public async Task TC_005_VerifyNoItemsDisplayed()
+    {
+        var searchTerm = "prty";
+        var _homePage = new TMDBHomePage(Page);
+
+        Logger.TestStart("TC-005: Verify No Items Displayed for Invalid Search");
+
+        try
+        {
+            await _homePage!.NavigateToHomeAsync();
+
+            Logger.Step("1", $"Search for invalid term '{searchTerm}'");
+            await _homePage.SearchByTitleAsync(searchTerm);
+
+            Logger.Step("2", "Verify search was performed");
+            var searchValue = await _homePage.GetSearchValueAsync();
+            Logger.Assert(searchValue?.Contains(searchTerm) ?? false, "Search input contains search term");
+
+            Logger.Step("3", "Verify no results are displayed");
+            await _homePage.VerifyNoResultDisplayed();
+            var resultsCount = await _homePage.GetResultsCountAsync();
+            Logger.Info($"Search returned {resultsCount} results");
+
+            // Verify resultsCount should be 0
+            if (resultsCount == 0)
+            {
+                Logger.Info($"✓ No results displayed as expected for invalid search term '{searchTerm}'");
+                Logger.TestEnd("TC-005", true);
+            }
+            else
+            {
+                var errorMessage = $"Expected 0 results but found {resultsCount} results for search term '{searchTerm}'";
+                Logger.Error(errorMessage);
+                Logger.TestEnd("TC-005", false, errorMessage);
+                Assert.Fail(errorMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-005", false, ex.Message);
+            throw;
+        }
+    }
+
+
+
+
+
 }

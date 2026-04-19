@@ -10,15 +10,10 @@ public class TrendingPage : TMDBBasePage
 {
     private const string BaseUrl = "https://tmdb-discover.surge.sh/";
 
-    // Filter Options
-    private const string MovieTypeSelector = "button:has-text('Movies')";
-    private const string TVShowTypeSelector = "button:has-text('TV Shows')";
-
     // Results
     private const string ResultCardSelector = "[class*='card'], [class*='result-item']";
     private const string ResultTitleSelector = "h3, h2, [class*='title']";
     private const string ResultRatingSelector = "[class*='rating'], [class*='vote']";
-    private const string TrendingBadgeSelector = "[class*='trending'], [class*='badge']";
 
     // Pagination
     private const string NextPageButtonSelector = "button:has-text('Next'), [aria-label*='next']";
@@ -33,7 +28,7 @@ public class TrendingPage : TMDBBasePage
     /// </summary>
     public async Task NavigateToTrendingAsync()
     {
-        await NavigateToAsync(BaseUrl);
+        await ClickToNavigateToTrendingPage();
         await WaitForLoadingToCompleteAsync();
         Logger.Info("Navigated to Trending page");
     }
@@ -49,44 +44,13 @@ public class TrendingPage : TMDBBasePage
     }
 
     /// <summary>
-    /// Filter to Movies only on Trending page
-    /// </summary>
-    public async Task FilterToMoviesAsync()
-    {
-        await ClickAsync(MovieTypeSelector);
-        await WaitForLoadingToCompleteAsync();
-        Logger.Info("Filtered to Movies on Trending page");
-    }
-
-    /// <summary>
-    /// Filter to TV Shows only on Trending page
-    /// </summary>
-    public async Task FilterToTVShowsAsync()
-    {
-        await ClickAsync(TVShowTypeSelector);
-        await WaitForLoadingToCompleteAsync();
-        Logger.Info("Filtered to TV Shows on Trending page");
-    }
-
-    /// <summary>
     /// Get all trending items titles
     /// </summary>
-    public async Task<List<string?>> GetTrendingItemsAsync()
+    public async Task<int> GetTrendingItemsAsync()
     {
-        var titles = new List<string?>();
-        var titleLocators = Page.Locator(ResultCardSelector).Locator(ResultTitleSelector);
-        int count = await titleLocators.CountAsync();
-
-        for (int i = 0; i < count; i++)
-        {
-            var title = await titleLocators.Nth(i).TextContentAsync();
-            if (!string.IsNullOrEmpty(title))
-            {
-                titles.Add(title.Trim());
-            }
-        }
-
-        return titles;
+        await WaitForLoadingToCompleteAsync();
+        var resultsSelector = "[class*='result'], [class*='card'], [class*='item']";
+        return await Page.Locator(resultsSelector).CountAsync();
     }
 
     /// <summary>

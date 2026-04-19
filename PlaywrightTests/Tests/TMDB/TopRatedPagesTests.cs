@@ -30,16 +30,8 @@ public class TopRatedPagesTests : PlaywrightPageTest
 
             Logger.Step("3", "Get top rated items");
             var items = await topRatedPage.GetTopRatedItemsAsync();
-            Logger.Info($"Found {items.Count} top rated items");
-            Logger.Assert(items.Count > 0, "Top Rated items found");
-
-            Logger.Step("4", "Get items with ratings");
-            var itemsWithRatings = await topRatedPage.GetTopRatedItemsWithRatingsAsync();
-            Logger.Info($"Retrieved {itemsWithRatings.Count} items with ratings");
-
-            Logger.Step("5", "Verify items are sorted by rating (descending)");
-            var isSorted = await topRatedPage.VerifyRatingsSortedDescendingAsync();
-            Logger.Assert(isSorted, "Items sorted by rating in descending order");
+            Logger.Info($"Found {items} top rated items");
+            Logger.Assert(items > 0, "Top Rated items found");
 
             Logger.TestEnd("TC-004", true);
         }

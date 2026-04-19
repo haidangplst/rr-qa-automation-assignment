@@ -31,8 +31,8 @@ public class TrendPagesTests : PlaywrightPageTest
 
             Logger.Step("3", "Get trending items");
             var items = await trendingPage.GetTrendingItemsAsync();
-            Logger.Info($"Found {items.Count} trending items");
-            Logger.Assert(items.Count > 0, "Trending items found");
+            Logger.Info($"Found {items} trending items");
+            Logger.Assert(items > 0, "Trending items found");
 
             Logger.Step("4", "Get items with ratings");
             var itemsWithRatings = await trendingPage.GetTrendingItemsWithRatingsAsync();

@@ -1,7 +1,5 @@
-using Microsoft.Playwright.NUnit;
-using NUnit.Framework;
-using PlaywrightTests.PageObjects.TMDB;
 using PlaywrightTests.BaseTests;
+using PlaywrightTests.PageObjects.TMDB;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
@@ -30,8 +28,8 @@ public class NewestPagesTests : PlaywrightPageTest
 
             Logger.Step("3", "Get newest items");
             var items = await newestPage.GetNewestItemsAsync();
-            Logger.Info($"Found {items.Count} newest items");
-            Logger.Assert(items.Count > 0, "Newest items found");
+            Logger.Info($"Found {items} newest items");
+            Logger.Assert(items > 0, "Newest items found");
 
             Logger.Step("4", "Get items with release dates");
             var itemsWithDates = await newestPage.GetNewestItemsWithDatesAsync();

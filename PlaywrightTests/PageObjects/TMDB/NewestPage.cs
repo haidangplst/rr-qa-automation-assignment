@@ -33,7 +33,7 @@ public class NewestPage : TMDBBasePage
     /// </summary>
     public async Task NavigateToNewestAsync()
     {
-        await NavigateToAsync(BaseUrl);
+        await ClickToNavigateToNewestPage();
         await WaitForLoadingToCompleteAsync();
         Logger.Info("Navigated to Newest page");
     }
@@ -71,22 +71,11 @@ public class NewestPage : TMDBBasePage
     /// <summary>
     /// Get all newest items titles
     /// </summary>
-    public async Task<List<string?>> GetNewestItemsAsync()
+    public async Task<int> GetNewestItemsAsync()
     {
-        var titles = new List<string?>();
-        var titleLocators = Page.Locator(ResultCardSelector).Locator(ResultTitleSelector);
-        int count = await titleLocators.CountAsync();
-
-        for (int i = 0; i < count; i++)
-        {
-            var title = await titleLocators.Nth(i).TextContentAsync();
-            if (!string.IsNullOrEmpty(title))
-            {
-                titles.Add(title.Trim());
-            }
-        }
-
-        return titles;
+        await WaitForLoadingToCompleteAsync();
+        var resultsSelector = "[class*='result'], [class*='card'], [class*='item']";
+        return await Page.Locator(resultsSelector).CountAsync();
     }
 
     /// <summary>

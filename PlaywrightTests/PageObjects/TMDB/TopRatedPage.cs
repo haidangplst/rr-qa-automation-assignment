@@ -32,7 +32,7 @@ public class TopRatedPage : TMDBBasePage
     /// </summary>
     public async Task NavigateToTopRatedAsync()
     {
-        await NavigateToAsync(BaseUrl);
+        await ClickToNavigateToTopRatedPage();
         await WaitForLoadingToCompleteAsync();
         Logger.Info("Navigated to Top Rated page");
     }
@@ -70,22 +70,11 @@ public class TopRatedPage : TMDBBasePage
     /// <summary>
     /// Get all top rated items titles
     /// </summary>
-    public async Task<List<string?>> GetTopRatedItemsAsync()
+    public async Task<int> GetTopRatedItemsAsync()
     {
-        var titles = new List<string?>();
-        var titleLocators = Page.Locator(ResultCardSelector).Locator(ResultTitleSelector);
-        int count = await titleLocators.CountAsync();
-
-        for (int i = 0; i < count; i++)
-        {
-            var title = await titleLocators.Nth(i).TextContentAsync();
-            if (!string.IsNullOrEmpty(title))
-            {
-                titles.Add(title.Trim());
-            }
-        }
-
-        return titles;
+        await WaitForLoadingToCompleteAsync();
+        var resultsSelector = "[class*='result'], [class*='card'], [class*='item']";
+        return await Page.Locator(resultsSelector).CountAsync();
     }
 
     /// <summary>

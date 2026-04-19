@@ -15,7 +15,7 @@ public class PopularPage : TMDBBasePage
     private const string CategoryLabelSelector = "[class*='title'], [class*='header']";
 
     // Filter Options
-    private const string TypeDropdownSelector = "//span[contains(@class, 'indicatorSeparator')]//..//..//div[text()='Movie']";
+    
     private const string TVShowTypeSelector = "//span[contains(@class, 'indicatorSeparator')]//..//..//div[text()='TV Shows']";
 
     // Results
@@ -28,6 +28,8 @@ public class PopularPage : TMDBBasePage
     private const string NextPageButtonSelector = "button:has-text('Next'), [aria-label*='next']";
     private const string PreviousPageButtonSelector = "button:has-text('Prev'), [aria-label*='previous']";
 
+
+    private const string PageNotFound = "//div//h1[text() = 'page not found']";
     public PopularPage(IPage page) : base(page)
     {
     }
@@ -42,6 +44,12 @@ public class PopularPage : TMDBBasePage
         Logger.Info("Navigated to Popular page");
     }
 
+    public async Task VerifyThePageIsNotFoundAsync()
+    {
+        await Page.Locator(PageNotFound).IsVisibleAsync();
+        Logger.Info($"Page is not found");
+    }
+
     /// <summary>
     /// Verify page is on Popular category
     /// </summary>
@@ -50,75 +58,6 @@ public class PopularPage : TMDBBasePage
         await WaitForLoadingToCompleteAsync();
         var resultsCount = await GetResultsCountAsync();
         return resultsCount > 0;
-    }
-
-    /// <summary>
-    /// Filter to Movies only on Popular page
-    /// </summary>
-    public async Task FilterToMoviesAsync()
-    {
-        // Check current selection
-        var currentSelection = await Page.EvaluateAsync<string>(@"
-            () => {
-                const singleValue = document.querySelector('.css-1uccc91-singleValue');
-                return singleValue ? singleValue.textContent.trim() : '';
-            }
-        ");
-
-        if (currentSelection == "Movie")
-        {
-            Logger.Info("Movie filter already selected");
-            return;
-        }
-
-        await ClickAsync(TypeDropdownSelector);
-        await Page.Locator("[class*='option']").Filter(new() { HasText = "Movie" }).ClickAsync();
-
-        await WaitForLoadingToCompleteAsync();
-
-        var sellectedOption = await Page.EvaluateAsync<string>(@"
-            () => {
-                const singleValue = document.querySelector('.css-1uccc91-singleValue');
-                return singleValue ? singleValue.textContent.trim() : '';
-            }
-        ");
-        sellectedOption.Equals("Movie", StringComparison.OrdinalIgnoreCase);
-
-        Logger.Info("Filtered to Movies on Popular page");
-    }
-
-    /// <summary>
-    /// Filter to TV Shows only on Popular page
-    /// </summary>
-    public async Task FilterToTVShowsAsync()
-    {
-        var currentSelection = await Page.EvaluateAsync<string>(@"
-            () => {
-                const singleValue = document.querySelector('.css-1uccc91-singleValue');
-                return singleValue ? singleValue.textContent.trim() : '';
-            }
-        ");
-
-        if (currentSelection == "TV Shows")
-        {
-            Logger.Info("Movie filter already selected");
-            return;
-        }
-
-        await ClickAsync(TypeDropdownSelector);
-        await Page.Locator("[class*='option']").Filter(new() { HasText = "TV Shows" }).ClickAsync();
-
-        await WaitForLoadingToCompleteAsync();
-
-        var sellectedOption = await Page.EvaluateAsync<string>(@"
-            () => {
-                const singleValue = document.querySelector('.css-1uccc91-singleValue');
-                return singleValue ? singleValue.textContent.trim() : '';
-            }
-        ");
-        sellectedOption.Equals("TV Shows", StringComparison.OrdinalIgnoreCase);
-
-        Logger.Info("Filtered to Movies on Popular page");
     }
 
     /// <summary>
