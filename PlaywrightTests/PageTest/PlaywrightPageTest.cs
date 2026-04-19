@@ -29,13 +29,43 @@ public class PlaywrightPageTest : PageTest
     [SetUp]
     public async Task SetUp()
     {
-        // Navigate to base URL before each test
-        await Page.GotoAsync(TestConfig.BaseUrl, new PageGotoOptions
+        // Navigate to base URL before each test with retry logic
+        int maxRetries = 3;
+        int retryCount = 0;
+        Exception? lastException = null;
+
+        while (retryCount < maxRetries)
         {
-            WaitUntil = WaitUntilState.NetworkIdle,
-            Timeout = TestConfig.NavigationTimeout
-        });
-        Logger.Info($"Navigated to base URL: {TestConfig.BaseUrl}");
+            try
+            {
+                await Page.GotoAsync(TestConfig.BaseUrl, new PageGotoOptions
+                {
+                    WaitUntil = WaitUntilState.NetworkIdle,
+                    Timeout = TestConfig.NavigationTimeout
+                });
+                Logger.Info($"Navigated to base URL: {TestConfig.BaseUrl}");
+                return; // Success, exit the method
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                retryCount++;
+                Logger.Warning($"Navigation attempt {retryCount} failed: {ex.Message}");
+
+                if (retryCount < maxRetries)
+                {
+                    Logger.Info($"Retrying navigation (attempt {retryCount + 1} of {maxRetries})...");
+                    await Task.Delay(2000); // Wait 2 seconds before retry
+                }
+            }
+        }
+
+        // If all retries failed, throw the last exception
+        if (lastException != null)
+        {
+            Logger.Error($"Failed to navigate after {maxRetries} attempts");
+            throw lastException;
+        }
     }
 
     [OneTimeTearDown]
