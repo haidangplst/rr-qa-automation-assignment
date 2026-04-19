@@ -13,9 +13,9 @@ public class TopRatedPagesTests : PlaywrightPageTest
     [Test]
     [Category("TopRatedPagesTests")]
     [Category("Smoke")]
-    public async Task TC_004_FilterByTopRatedCategory()
+    public async Task TC_010_FilterByTopRatedCategory()
     {
-        Logger.TestStart("TC-004: Filter by Top Rated Category");
+        Logger.TestStart("TC-010: Filter by Top Rated Category");
 
         try
         {
@@ -33,12 +33,12 @@ public class TopRatedPagesTests : PlaywrightPageTest
             Logger.Info($"Found {items} top rated items");
             Logger.Assert(items > 0, "Top Rated items found");
 
-            Logger.TestEnd("TC-004", true);
+            Logger.TestEnd("TC-010", true);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-004", false, ex.Message);
+            Logger.TestEnd("TC-010", false, ex.Message);
             throw;
         }
     }

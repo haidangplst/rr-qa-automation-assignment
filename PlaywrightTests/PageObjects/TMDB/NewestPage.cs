@@ -8,8 +8,6 @@ namespace PlaywrightTests.PageObjects.TMDB;
 /// </summary>
 public class NewestPage : TMDBBasePage
 {
-    private const string BaseUrl = "https://tmdb-discover.surge.sh/";
-
     // Filter Options
     private const string MovieTypeSelector = "button:has-text('Movies')";
     private const string TVShowTypeSelector = "button:has-text('TV Shows')";
@@ -18,7 +16,6 @@ public class NewestPage : TMDBBasePage
     private const string ResultCardSelector = "[class*='card'], [class*='result-item']";
     private const string ResultTitleSelector = "h3, h2, [class*='title']";
     private const string ResultReleaseDateSelector = "[class*='date'], [class*='release']";
-    private const string ResultRatingSelector = "[class*='rating'], [class*='vote']";
 
     // Pagination
     private const string NextPageButtonSelector = "button:has-text('Next'), [aria-label*='next']";
@@ -34,6 +31,7 @@ public class NewestPage : TMDBBasePage
     public async Task NavigateToNewestAsync()
     {
         await ClickToNavigateToNewestPage();
+        await WaitForElementAsync(GetNavigationBarSelectedSelector("white", "new"));  //validate the menu is sellected
         await WaitForLoadingToCompleteAsync();
         Logger.Info("Navigated to Newest page");
     }

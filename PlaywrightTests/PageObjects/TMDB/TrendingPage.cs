@@ -8,8 +8,6 @@ namespace PlaywrightTests.PageObjects.TMDB;
 /// </summary>
 public class TrendingPage : TMDBBasePage
 {
-    private const string BaseUrl = "https://tmdb-discover.surge.sh/";
-
     // Results
     private const string ResultCardSelector = "[class*='card'], [class*='result-item']";
     private const string ResultTitleSelector = "h3, h2, [class*='title']";
@@ -78,33 +76,5 @@ public class TrendingPage : TMDBBasePage
         }
 
         return items;
-    }
-
-    /// <summary>
-    /// Navigate to next page of trending items
-    /// </summary>
-    public async Task GoToNextPageAsync()
-    {
-        var nextButton = Page.Locator(NextPageButtonSelector);
-        if (await nextButton.IsEnabledAsync())
-        {
-            await nextButton.ClickAsync();
-            await WaitForLoadingToCompleteAsync();
-            Logger.Info("Navigated to next page of Trending");
-        }
-    }
-
-    /// <summary>
-    /// Navigate to previous page of trending items
-    /// </summary>
-    public async Task GoToPreviousPageAsync()
-    {
-        var prevButton = Page.Locator(PreviousPageButtonSelector);
-        if (await prevButton.IsEnabledAsync())
-        {
-            await prevButton.ClickAsync();
-            await WaitForLoadingToCompleteAsync();
-            Logger.Info("Navigated to previous page of Trending");
-        }
     }
 }

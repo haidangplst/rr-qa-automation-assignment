@@ -1,5 +1,4 @@
 using Microsoft.Playwright;
-using PlaywrightTests.PageObjects;
 using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.PageObjects.TMDB;
@@ -23,7 +22,11 @@ public abstract class TMDBBasePage : BasePage
     private const string ResultItemDisplayedImage = "//div[contains(@class, 'grid-cols-3 gap-4')]//div[contains(@class, 'items-center')]//img[contains(@src, 'https')]";
     private const string NoResultsSelector = "//div[contains(@class, 'items-center justify-center text-white')]";
 
-
+    /// <summary>
+    /// Get navigation bar selector with specific color and href
+    /// </summary>
+    public static string GetNavigationBarSelectedSelector(string color = "white", string href = "new")
+        => $"//li[contains(@class, 'text-{color}')]//a[@href='/{href}']";
 
     /// <summary>
     /// Wait for loading indicator to disappear
@@ -47,6 +50,7 @@ public abstract class TMDBBasePage : BasePage
     public async Task ClickToNavigateToTrendingPage()
     {
         await ClickAsync(TrendingNavLinkSelector);
+        await WaitForElementAsync(GetNavigationBarSelectedSelector("white", "trend"));  //validate the menu is sellected
         await WaitForLoadingToCompleteAsync();
     }
 
@@ -74,6 +78,8 @@ public abstract class TMDBBasePage : BasePage
     public async Task ClickToNavigateToTopRatedPage()
     {
         await ClickAsync(TopRatedNavLinkSelector);
+        await WaitForElementAsync(GetNavigationBarSelectedSelector("white", "top"));  //validate the menu is sellected
+
         await WaitForLoadingToCompleteAsync();
     }
 
@@ -187,9 +193,6 @@ public abstract class TMDBBasePage : BasePage
 
         return itemsWithErrorImages;
     }
-
-
-        
 
     /// <summary>
     /// Extract API calls from network logs

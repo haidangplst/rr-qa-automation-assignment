@@ -14,9 +14,9 @@ public class TrendPagesTests : PlaywrightPageTest
     [Test]
     [Category("CategoryPages")]
     [Category("Smoke")]
-    public async Task TC_002_FilterByTrendingCategory()
+    public async Task TC_011_FilterByTrendingCategory()
     {
-        Logger.TestStart("TC-002: Filter by Trending Category");
+        Logger.TestStart("TC-011: Filter by Trending Category");
 
         try
         {
@@ -38,12 +38,12 @@ public class TrendPagesTests : PlaywrightPageTest
             var itemsWithRatings = await trendingPage.GetTrendingItemsWithRatingsAsync();
             Logger.Info($"Retrieved {itemsWithRatings.Count} items with ratings");
 
-            Logger.TestEnd("TC-002", true);
+            Logger.TestEnd("TC-011", true);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-002", false, ex.Message);
+            Logger.TestEnd("TC-011", false, ex.Message);
             throw;
         }
     }

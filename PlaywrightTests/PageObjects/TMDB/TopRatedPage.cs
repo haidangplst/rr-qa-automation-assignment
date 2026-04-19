@@ -8,8 +8,6 @@ namespace PlaywrightTests.PageObjects.TMDB;
 /// </summary>
 public class TopRatedPage : TMDBBasePage
 {
-    private const string BaseUrl = "https://tmdb-discover.surge.sh/";
-
     // Filter Options
     private const string MovieTypeSelector = "button:has-text('Movies')";
     private const string TVShowTypeSelector = "button:has-text('TV Shows')";
@@ -48,26 +46,6 @@ public class TopRatedPage : TMDBBasePage
     }
 
     /// <summary>
-    /// Filter to Movies only on Top Rated page
-    /// </summary>
-    public async Task FilterToMoviesAsync()
-    {
-        await ClickAsync(MovieTypeSelector);
-        await WaitForLoadingToCompleteAsync();
-        Logger.Info("Filtered to Movies on Top Rated page");
-    }
-
-    /// <summary>
-    /// Filter to TV Shows only on Top Rated page
-    /// </summary>
-    public async Task FilterToTVShowsAsync()
-    {
-        await ClickAsync(TVShowTypeSelector);
-        await WaitForLoadingToCompleteAsync();
-        Logger.Info("Filtered to TV Shows on Top Rated page");
-    }
-
-    /// <summary>
     /// Get all top rated items titles
     /// </summary>
     public async Task<int> GetTopRatedItemsAsync()
@@ -103,53 +81,5 @@ public class TopRatedPage : TMDBBasePage
 
         // Verify items are sorted by rating (descending)
         return items.OrderByDescending(x => x.Item2).ToList();
-    }
-
-    /// <summary>
-    /// Navigate to next page of top rated items
-    /// </summary>
-    public async Task GoToNextPageAsync()
-    {
-        var nextButton = Page.Locator(NextPageButtonSelector);
-        if (await nextButton.IsEnabledAsync())
-        {
-            await nextButton.ClickAsync();
-            await WaitForLoadingToCompleteAsync();
-            Logger.Info("Navigated to next page of Top Rated");
-        }
-    }
-
-    /// <summary>
-    /// Navigate to previous page of top rated items
-    /// </summary>
-    public async Task GoToPreviousPageAsync()
-    {
-        var prevButton = Page.Locator(PreviousPageButtonSelector);
-        if (await prevButton.IsEnabledAsync())
-        {
-            await prevButton.ClickAsync();
-            await WaitForLoadingToCompleteAsync();
-            Logger.Info("Navigated to previous page of Top Rated");
-        }
-    }
-
-    /// <summary>
-    /// Verify top rated items are in descending order by rating
-    /// </summary>
-    public async Task<bool> VerifyRatingsSortedDescendingAsync()
-    {
-        var items = await GetTopRatedItemsWithRatingsAsync();
-
-        for (int i = 0; i < items.Count - 1; i++)
-        {
-            if (items[i].Rating < items[i + 1].Rating)
-            {
-                Logger.Warning($"Items not sorted correctly: {items[i].Title} ({items[i].Rating}) < {items[i + 1].Title} ({items[i + 1].Rating})");
-                return false;
-            }
-        }
-
-        Logger.Info("Top Rated items are correctly sorted in descending order");
-        return true;
     }
 }

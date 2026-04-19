@@ -11,9 +11,9 @@ public class NewestPagesTests : PlaywrightPageTest
     [Test]
     [Category("NewestPagesTests")]
     [Category("Smoke")]
-    public async Task TC_003_FilterByNewestCategory()
+    public async Task TC_009_FilterByNewestCategory()
     {
-        Logger.TestStart("TC-003: Filter by Newest Category");
+        Logger.TestStart("TC-009: Filter by Newest Category");
 
         try
         {
@@ -35,12 +35,12 @@ public class NewestPagesTests : PlaywrightPageTest
             var itemsWithDates = await newestPage.GetNewestItemsWithDatesAsync();
             Logger.Info($"Retrieved {itemsWithDates.Count} items with dates");
 
-            Logger.TestEnd("TC-003", true);
+            Logger.TestEnd("TC-009", true);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-003", false, ex.Message);
+            Logger.TestEnd("TC-009", false, ex.Message);
             throw;
         }
     }

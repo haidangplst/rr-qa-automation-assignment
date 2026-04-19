@@ -5,18 +5,106 @@ using PlaywrightTests.Utilities;
 
 namespace PlaywrightTests.Tests.TMDB;
 
-[Category("Smoke")]
 [Parallelizable(ParallelScope.All)]
 [TestFixture]
 public class PopularPagesTests : PlaywrightPageTest
 {
-    [Test]
-    [Category("CategoryPagesTests")]
 
-    
-    public async Task TC_001_FilterByPopularCategory()
+    [Test]
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_001_Validate_TheUIDisplayedInDefaulePage()
     {
-        var testName = "TC_001_FilterByPopularCategory";
+        Logger.TestStart("TC-001: Verify The UI Displayed In Defaule Page");
+
+        try
+        {
+            var homePage = new TMDBHomePage(Page);
+
+            await homePage.WaitForDiscoveryOptionFieldsDisplayedAsync();
+            await homePage.VerifyTheNavigationBarMenu();
+            await homePage.VerifyTheSearchBoxDisplayed();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-001", false, ex.Message);
+            throw;
+        }
+    }
+
+    [Test]
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_001_1_Validate_ThePagination()
+    {
+        Logger.TestStart("TC-001.1: Verify The Pagination");
+
+        try
+        {
+            var popularPage = new PopularPage(Page);
+            var homePage = new TMDBHomePage(Page);
+
+            await homePage.WaitForDiscoveryOptionFieldsDisplayedAsync();
+            await homePage.VerifyTheNavigationBarMenu();
+            await homePage.VerifyTheSearchBoxDisplayed();
+            await homePage.VerifyTheDefaultDisplayedPage();
+            await homePage.ValidateThePageSelectorNumber();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-001", false, ex.Message);
+            throw;
+        }
+    }
+
+    [Test]
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_001_2_Validate_ClickOnThePagination()
+    {
+        Logger.TestStart("TC-001.2: Verify Click On The Pagination");
+
+        try
+        {
+            var popularPage = new PopularPage(Page);
+            var homePage = new TMDBHomePage(Page);
+
+            await homePage.VerifyTheDefaultDisplayedPage();
+            var pageNumber = await homePage.ValidateThePageSelectorNumber();
+
+            // Select a random page (pass 0 or negative number for random selection)
+            // Or pass a specific page number like 3 for fixed page selection
+            var selectedPage = await homePage.SelectPaginationPage(0); // 0 = random page
+
+            var items = await popularPage.GetResultsCountAsync();
+            TestExecutionLogger.LogStepInfo($"Found {items} popular items on page {selectedPage}");
+            if (items == 0)
+            {
+                TestExecutionLogger.FailStep("No popular items found, please check again!");
+                throw new Exception("No items found on page");
+            }
+            TestExecutionLogger.CompleteStep();
+
+            Logger.TestEnd("TC-001.2", true);
+            TestExecutionLogger.CompleteTest(true);
+
+        }
+        catch (Exception ex)
+        {
+            Logger.Error("Test failed", ex);
+            Logger.TestEnd("TC-001.2", false, ex.Message);
+            throw;
+        }
+    }
+
+    [Test]
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_002_Validate_FilterByPopularCategory()
+    {
+        var testName = "TC_002_FilterByPopularCategory";
         TestExecutionLogger.StartTest(testName, "CategoryPages");
 
         try
@@ -42,33 +130,33 @@ public class PopularPagesTests : PlaywrightPageTest
 
             // Step 3
             TestExecutionLogger.RecordStep(3, "Get popular items");
-            var items = await popularPage.GetPopularItemsAsync();
-            TestExecutionLogger.LogStepInfo($"Found {items.Count} popular items");
-            TestExecutionLogger.LogStepInfo($"Item names: {string.Join(", ", items.Take(3))}...");
-            if (items.Count == 0)
+            var items = await popularPage.GetResultsCountAsync();
+            TestExecutionLogger.LogStepInfo($"Found {items} popular items");
+            if (items == 0)
             {
                 TestExecutionLogger.FailStep("No popular items found");
                 throw new Exception("No items found on page");
             }
             TestExecutionLogger.CompleteStep();
 
-            Logger.TestEnd("TC-001", true);
+            Logger.TestEnd("TC-002", true);
             TestExecutionLogger.CompleteTest(true);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-001", false, ex.Message);
+            Logger.TestEnd("TC-002", false, ex.Message);
             TestExecutionLogger.CompleteTest(false, ex.Message, ex.StackTrace);
             throw;
         }
     }
 
     [Test]
-    [Category("CategoryPages")]
-    public async Task TC_009_FilterByTVShowsType()
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_003_Validate_FilterByTVShowsType()
     {
-        Logger.TestStart("TC-009: Filter by TV Shows Type");
+        Logger.TestStart("TC-003: Filter by TV Shows Type");
 
         try
         {
@@ -88,21 +176,21 @@ public class PopularPagesTests : PlaywrightPageTest
             var resultsCount = await popularPage.GetResultsCountAsync();
             Logger.Assert(resultsCount > 0, "TV Show results displayed", $"Found {resultsCount} results");
 
-            Logger.TestEnd("TC-009", resultsCount > 0);
+            Logger.TestEnd("TC-003", resultsCount > 0);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-009", false, ex.Message);
+            Logger.TestEnd("TC-003", false, ex.Message);
             throw;
         }
     }
 
     [Test]
     [Category("CategoryPages")]
-    public async Task TC_010_ToggleBetweenMoviesAndTVShows()
+    public async Task TC_004_Validate_ToggleBetweenMoviesAndTVShows()
     {
-        Logger.TestStart("TC-010: Toggle Between Movies and TV Shows");
+        Logger.TestStart("TC-004: Toggle Between Movies and TV Shows");
 
         try
         {
@@ -127,21 +215,22 @@ public class PopularPagesTests : PlaywrightPageTest
             var moviesCountAgain = await popularPage.GetResultsCountAsync();
 
             Logger.Assert(moviesCount > 0 && tvShowsCount > 0, "Both filters return results");
-            Logger.TestEnd("TC-010", moviesCount > 0 && tvShowsCount > 0);
+            Logger.TestEnd("TC-004", moviesCount > 0 && tvShowsCount > 0);
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-010", false, ex.Message);
+            Logger.TestEnd("TC-004", false, ex.Message);
             throw;
         }
     }
 
     [Test]
-    [Category("CategoryPages")]
-    public async Task TC_011_VerifyCannotDirectAccessUrlToPopularPage()
+    [Category("Smoke")]
+    [Category("PopularPageTests")]
+    public async Task TC_005_Validate_CannotDirectAccessUrlToPopularPage()
     {
-        Logger.TestStart("TC-011: VerifyCannotDirectAccessUrlToPopularPage");
+        Logger.TestStart("TC-005: VerifyCannotDirectAccessUrlToPopularPage");
 
         try
         {
@@ -156,20 +245,20 @@ public class PopularPagesTests : PlaywrightPageTest
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-011", false, ex.Message);
+            Logger.TestEnd("TC-005", false, ex.Message);
             throw;
         }
     }
 
     [Test]
-    [Category("TitleSearch")]
     [Category("Smoke")]
-    public async Task TC_005_SearchByTitle_ExactMatch()
+    [Category("PopularPageTests")]
+    public async Task TC_006_SearchByTitle_ExactMatch()
     {
         var searchTerm = "inception";
         var _homePage = new TMDBHomePage(Page);
 
-        Logger.TestStart("TC-005: Search by Title - Exact Match");
+        Logger.TestStart("TC-006: Search by Title - Exact Match");
         await _homePage!.NavigateToHomeAsync();
 
         var searchTitle = "Inception";
@@ -187,14 +276,14 @@ public class PopularPagesTests : PlaywrightPageTest
     }
 
     [Test]
-    [Category("TitleSearch")]
     [Category("Smoke")]
-    public async Task TC_005_VerifyAndTheItemsHasImageErrorDisplayed()
+    [Category("PopularPageTests")]
+    public async Task TC_007_Validate_TheItemsHasImageErrorDisplayed()
     {
         var searchTitle = "inception";
         var _homePage = new TMDBHomePage(Page);
 
-        Logger.TestStart("TC-005: Verify Items Have No Image Errors");
+        Logger.TestStart("TC-007: Verify Items Have No Image Errors");
 
         try
         {
@@ -222,32 +311,32 @@ public class PopularPagesTests : PlaywrightPageTest
             {
                 var errorMessage = $"Found {itemsError.Count} item(s) with image errors: {string.Join(", ", itemsError.Take(5))}";
                 Logger.Error(errorMessage);
-                Logger.TestEnd("TC-005", false, errorMessage);
+                Logger.TestEnd("TC-007", false, errorMessage);
                 Assert.Fail(errorMessage);
             }
             else
             {
                 Logger.Info($"✓ All {items.Count} items have valid images - no errors found!");
-                Logger.TestEnd("TC-005", true);
+                Logger.TestEnd("TC-007", true);
             }
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-005", false, ex.Message);
+            Logger.TestEnd("TC-007", false, ex.Message);
             throw;
         }
     }
 
     [Test]
-    [Category("TitleSearch")]
     [Category("Smoke")]
-    public async Task TC_005_VerifyNoItemsDisplayed()
+    [Category("PopularPageTests")]
+    public async Task TC_008_Validate_NoItemsDisplayed()
     {
         var searchTerm = "prty";
         var _homePage = new TMDBHomePage(Page);
 
-        Logger.TestStart("TC-005: Verify No Items Displayed for Invalid Search");
+        Logger.TestStart("TC-008: Verify No Items Displayed for Invalid Search");
 
         try
         {
@@ -269,26 +358,21 @@ public class PopularPagesTests : PlaywrightPageTest
             if (resultsCount == 0)
             {
                 Logger.Info($"✓ No results displayed as expected for invalid search term '{searchTerm}'");
-                Logger.TestEnd("TC-005", true);
+                Logger.TestEnd("TC-008", true);
             }
             else
             {
                 var errorMessage = $"Expected 0 results but found {resultsCount} results for search term '{searchTerm}'";
                 Logger.Error(errorMessage);
-                Logger.TestEnd("TC-005", false, errorMessage);
+                Logger.TestEnd("TC-008", false, errorMessage);
                 Assert.Fail(errorMessage);
             }
         }
         catch (Exception ex)
         {
             Logger.Error("Test failed", ex);
-            Logger.TestEnd("TC-005", false, ex.Message);
+            Logger.TestEnd("TC-008", false, ex.Message);
             throw;
         }
     }
-
-
-
-
-
 }
